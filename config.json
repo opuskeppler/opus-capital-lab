@@ -1,0 +1,12 @@
+{
+  "starting_capital_eur": 200.0,
+  "target_capital_eur": 400.0,
+  "fee_rate": 0.002,
+  "max_asset_weight": 0.45,
+  "minimum_trade_eur": 5.0,
+  "max_drawdown_pause": 0.15,
+  "assets": {
+    "bitcoin": {"symbol": "BTC", "name": "Bitcoin"},
+    "ethereum": {"symbol": "ETH", "name": "Ethereum"}
+  }
+}
