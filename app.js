@@ -4,6 +4,7 @@ let dashboard;
 let dashboards;
 let activeStrategy = 'trend';
 let marketPrices;
+const REFRESH_INTERVAL_MS = 180000;
 
 const signedMoney = value => `${value >= 0 ? '+' : '−'}${money.format(Math.abs(value))}`;
 const signedPct = value => `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
@@ -140,8 +141,23 @@ function selectStrategy(key, prices) {
   dashboard = dashboards[key];
   const entries = dashboards[`${key}-entries`];
   document.querySelectorAll('.strategy-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.strategy === key));
+  history.replaceState(null, '', `#${key}`);
   renderStrategySummary(prices);
   render(prices, entries);
+}
+
+function startRefreshCountdown() {
+  const target = Date.now() + REFRESH_INTERVAL_MS;
+  const label = document.querySelector('#refresh-countdown');
+  const tick = () => {
+    const remaining = Math.max(0, target - Date.now());
+    const minutes = Math.floor(remaining / 60000).toString().padStart(2, '0');
+    const seconds = Math.floor((remaining % 60000) / 1000).toString().padStart(2, '0');
+    label.textContent = `REFRESH · ${minutes}:${seconds}`;
+    if (remaining <= 0) location.reload();
+  };
+  tick();
+  setInterval(tick, 1000);
 }
 
 Promise.all([
@@ -154,7 +170,8 @@ Promise.all([
     dashboards = {trend, 'short-term': shortTerm, 'trend-entries': trendEntries, 'short-term-entries': shortEntries};
     marketPrices = prices;
     document.querySelectorAll('.strategy-tab').forEach(tab => tab.addEventListener('click', () => selectStrategy(tab.dataset.strategy, marketPrices)));
-    selectStrategy('trend', prices);
-    setInterval(() => currentPrices().then(next => { marketPrices = next; selectStrategy(activeStrategy, next); }).catch(() => {}), 180000);
+    const selected = location.hash.slice(1);
+    selectStrategy(['trend', 'short-term'].includes(selected) ? selected : 'trend', prices);
+    startRefreshCountdown();
   })
   .catch(error => { document.querySelector('#updated').textContent = 'Dados indisponíveis'; console.error(error); });
