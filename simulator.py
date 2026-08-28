@@ -137,6 +137,21 @@ def main() -> None:
         "operations": operations,
     }
     log(entry)
+    public_state = {
+        "generated_at": entry["timestamp"],
+        "config": {
+            "starting_capital_eur": CONFIG["starting_capital_eur"],
+            "target_capital_eur": CONFIG["target_capital_eur"],
+            "fee_rate": CONFIG["fee_rate"],
+            "max_drawdown_pause": CONFIG["max_drawdown_pause"],
+            "assets": CONFIG["assets"],
+        },
+        "state": state,
+        "snapshot": entry,
+    }
+    (ROOT / "data" / "dashboard.json").write_text(
+        json.dumps(public_state, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
 
     print(f"OPUS Crypto Paper Lab | {today}")
     print(f"Carteira: €{total:.2f} | Retorno: {entry['return_pct']:.2f}% | Drawdown: {entry['drawdown_pct']:.2f}%")
