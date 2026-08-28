@@ -1,6 +1,9 @@
 const money = new Intl.NumberFormat('pt-PT', { style: 'currency', currency: 'EUR' });
 const assetIds = ['bitcoin', 'ethereum'];
 let dashboard;
+let dashboards;
+let activeStrategy = 'trend';
+let marketPrices;
 
 const signedMoney = value => `${value >= 0 ? '+' : '−'}${money.format(Math.abs(value))}`;
 const signedPct = value => `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
@@ -118,6 +121,40 @@ function render(prices, entries) {
   renderLedger(entries);
 }
 
-Promise.all([fetch('data/dashboard.json', {cache:'no-store'}).then(r => r.json()), readLedger(), currentPrices()])
-  .then(([state, entries, prices]) => { dashboard = state; render(prices, entries); setInterval(() => currentPrices().then(next => render(next, entries)).catch(() => {}), 180000); })
+function strategyValue(book, prices) {
+  return book.state.cash_eur + assetIds.reduce((sum, asset) => sum + book.state.holdings[asset] * prices[asset].eur, 0);
+}
+
+function renderStrategySummary(prices) {
+  [['trend', '#trend-summary'], ['short-term', '#short-term-summary']].forEach(([key, selector]) => {
+    const book = dashboards[key];
+    const pnl = strategyValue(book, prices) - book.config.starting_capital_eur;
+    const el = document.querySelector(selector);
+    el.textContent = signedMoney(pnl);
+    el.className = tone(pnl);
+  });
+}
+
+function selectStrategy(key, prices) {
+  activeStrategy = key;
+  dashboard = dashboards[key];
+  const entries = dashboards[`${key}-entries`];
+  document.querySelectorAll('.strategy-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.strategy === key));
+  renderStrategySummary(prices);
+  render(prices, entries);
+}
+
+Promise.all([
+  fetch('data/dashboard.json', {cache:'no-store'}).then(r => r.json()), readLedger(),
+  fetch('data/short-term-dashboard.json', {cache:'no-store'}).then(r => r.json()),
+  fetch('logs/short-term-ledger.jsonl', {cache:'no-store'}).then(r => r.ok ? r.text() : '').then(text => text.trim().split('\n').filter(Boolean).map(line => JSON.parse(line))),
+  currentPrices()
+])
+  .then(([trend, trendEntries, shortTerm, shortEntries, prices]) => {
+    dashboards = {trend, 'short-term': shortTerm, 'trend-entries': trendEntries, 'short-term-entries': shortEntries};
+    marketPrices = prices;
+    document.querySelectorAll('.strategy-tab').forEach(tab => tab.addEventListener('click', () => selectStrategy(tab.dataset.strategy, marketPrices)));
+    selectStrategy('trend', prices);
+    setInterval(() => currentPrices().then(next => { marketPrices = next; selectStrategy(activeStrategy, next); }).catch(() => {}), 180000);
+  })
   .catch(error => { document.querySelector('#updated').textContent = 'Dados indisponíveis'; console.error(error); });

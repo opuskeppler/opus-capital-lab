@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T19:21:17.575761+00:00",
+  "generated_at": "2026-08-28T19:41:22.932629+00:00",
   "config": {
     "starting_capital_eur": 200.0,
     "target_capital_eur": 400.0,
@@ -23,30 +23,30 @@
       "bitcoin": 0.0013539768436337599,
       "ethereum": 0.04324793001709148
     },
-    "peak_value_eur": 200.29841822275267,
+    "peak_value_eur": 200.4106054943478,
     "max_drawdown": 0.0006232866859990915,
     "last_rebalance_date": "2026-08-28",
-    "last_evaluation_at": "2026-08-28T19:21:17.575761+00:00"
+    "last_evaluation_at": "2026-08-28T19:41:22.932629+00:00"
   },
   "snapshot": {
-    "timestamp": "2026-08-28T19:21:17.575761+00:00",
-    "portfolio_value_eur": 200.17,
-    "return_pct": 0.087,
-    "drawdown_pct": 0.062,
+    "timestamp": "2026-08-28T19:41:22.932629+00:00",
+    "portfolio_value_eur": 200.32,
+    "return_pct": 0.158,
+    "drawdown_pct": 0.047,
     "risk_pause": false,
     "analysis": {
       "bitcoin": {
-        "price_eur": 66624.0204,
-        "sma20_eur": 60547.2074,
-        "sma60_eur": 57326.1972,
-        "momentum_20d": 0.18706,
+        "price_eur": 66623.0032,
+        "sma20_eur": 60547.1566,
+        "sma60_eur": 57326.1802,
+        "momentum_20d": 0.18704,
         "bullish": true
       },
       "ethereum": {
-        "price_eur": 2088.5669,
-        "sma20_eur": 1860.5015,
-        "sma60_eur": 1691.4849,
-        "momentum_20d": 0.2643,
+        "price_eur": 2091.9028,
+        "sma20_eur": 1860.6683,
+        "sma60_eur": 1691.5405,
+        "momentum_20d": 0.26631,
         "bullish": true
       }
     },

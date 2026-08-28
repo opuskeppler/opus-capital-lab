@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-08-28T19:41:23.654453+00:00",
+  "strategy": "short-term",
+  "config": {
+    "starting_capital_eur": 200.0,
+    "fee_rate": 0.002,
+    "max_drawdown_pause": 0.03,
+    "assets": {
+      "bitcoin": {
+        "symbol": "BTC",
+        "name": "Bitcoin"
+      },
+      "ethereum": {
+        "symbol": "ETH",
+        "name": "Ethereum"
+      }
+    }
+  },
+  "state": {
+    "started_at": "2026-08-28T19:41:23.654679+00:00",
+    "cash_eur": 109.82,
+    "holdings": {
+      "bitcoin": 0.0,
+      "ethereum": 0.04277094157005109
+    },
+    "entry_price": {
+      "bitcoin": 0.0,
+      "ethereum": 2104.232375913358
+    },
+    "peak_value_eur": 200.0,
+    "max_drawdown": 0.0,
+    "session_date": "2026-08-28",
+    "last_evaluation_at": "2026-08-28T19:41:23.654453+00:00"
+  },
+  "snapshot": {
+    "timestamp": "2026-08-28T19:41:23.654453+00:00",
+    "portfolio_value_eur": 199.82,
+    "return_pct": -0.09,
+    "drawdown_pct": 0.0,
+    "risk_pause": false,
+    "analysis": {
+      "bitcoin": {
+        "price_eur": 67011.4359,
+        "fast_ma_eur": 67043.0506,
+        "slow_ma_eur": 66967.9717,
+        "momentum_15": 0.00048,
+        "bullish": false
+      },
+      "ethereum": {
+        "price_eur": 2104.2324,
+        "fast_ma_eur": 2103.666,
+        "slow_ma_eur": 2099.0023,
+        "momentum_15": 0.00239,
+        "bullish": true
+      }
+    },
+    "operations": [
+      {
+        "side": "BUY",
+        "asset": "ethereum",
+        "eur": 90.0,
+        "fee_eur": 0.18,
+        "quantity": 0.04277094157005109,
+        "reason": "ENTRADA"
+      }
+    ]
+  }
+}
