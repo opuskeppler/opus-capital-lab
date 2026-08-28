@@ -4,31 +4,29 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#090b0d" />
-    <title>OPUS Capital Lab</title>
-    <link rel="stylesheet" href="styles.css?v=3" />
+    <title>Carteira · Simulação</title>
+    <link rel="stylesheet" href="styles.css?v=4" />
   </head>
   <body>
     <div class="app-shell">
       <aside class="sidebar" aria-label="Navegação do Capital Lab">
-        <a class="brand" href="#top" aria-label="OPUS Capital Lab"><span class="brand-mark">O</span><span>OPUS<em>CAPITAL LAB</em></span></a>
-        <p class="side-label">LABORATÓRIO</p>
-        <nav class="side-nav"><a class="active" href="#top"><i class="nav-glyph round"></i>Visão geral</a><a href="#exposicao"><i class="nav-glyph"></i>Posições</a><a href="#auditoria"><i class="nav-glyph lines"></i>Auditoria</a></nav>
-        <p class="side-label">SISTEMA</p>
-        <nav class="side-nav"><a href="#decisao"><i class="nav-glyph round"></i>Regras de risco</a><a href="#metodo"><i class="nav-glyph"></i>Metodologia</a></nav>
-        <div class="sidebar-foot"><b>Paper trading</b>Sem custódia, alavancagem ou dinheiro real.</div>
+        <a class="brand" href="#top" aria-label="Carteira simulada"><span class="brand-mark">€</span><span>CARTEIRA<em>SIMULAÇÃO</em></span></a>
+        <p class="side-label">DADOS</p>
+        <nav class="side-nav"><a class="active" href="#top"><i class="nav-glyph round"></i>Resumo</a><a href="#exposicao"><i class="nav-glyph"></i>Posições</a><a href="#auditoria"><i class="nav-glyph lines"></i>Operações</a></nav>
+        <div class="sidebar-foot"><b>Simulado</b>Sem dinheiro real.</div>
       </aside>
       <div class="workspace">
-        <header class="topbar"><p class="crumb">DASHBOARD <b>/ VISÃO GERAL</b></p><div class="top-actions"><span class="mode"><i></i>PAPER TRADING</span><span class="updated" id="updated">A actualizar dados…</span><span class="avatar">OP</span></div></header>
+        <header class="topbar"><p class="crumb">CARTEIRA <b>/ DADOS LIVE</b></p><div class="top-actions"><span class="mode"><i></i>SIMULAÇÃO</span><span class="updated" id="updated">A actualizar dados…</span></div></header>
         <main id="top">
-          <section class="intro"><p class="eyebrow">Mandato 01 / 12 meses</p><div class="intro-line"><h1>Capital com<br /><em>disciplina.</em></h1><p>Uma simulação auditável de €200. Dados de mercado e avaliação de regras a cada três minutos.</p></div></section>
-          <section class="headline-grid" aria-label="Resumo da carteira"><article class="metric metric-primary"><p>Valor da carteira</p><strong id="portfolio-value">—</strong><span id="portfolio-return">—</span></article><article class="metric"><p>Progresso até à meta</p><strong id="target-progress">—</strong><span>€200 → €400 em até 12 meses</span></article><article class="metric"><p>Caixa disponível</p><strong id="cash-value">—</strong><span id="cash-weight">—</span></article><article class="metric risk-metric"><p>Drawdown máximo</p><strong id="drawdown">—</strong><span>limite de pausa: 15,00%</span></article></section>
-          <section class="content-grid"><article class="panel performance"><div class="panel-head"><div><p class="eyebrow">Trajectória</p><h2>Valor simulado</h2></div><span class="status active" id="system-status">Activo</span></div><div class="chart-wrap"><svg id="value-chart" viewBox="0 0 700 190" role="img" aria-label="Evolução do valor da carteira"><path id="chart-fill"></path><path id="chart-line"></path><line x1="0" y1="156" x2="700" y2="156"></line></svg><div class="chart-note"><span>CAPITAL INICIAL<br /><b>€200,00</b></span><span>OBJECTIVO<br /><b>€400,00</b></span></div></div><div class="method-note" id="metodo"><span>REGRAS DO CICLO</span><p>Sem alavancagem. Exposição máxima de 45% por activo. A estratégia é avaliada a cada três minutos e só abre posições quando preço, média móvel de 20 dias e média móvel de 60 dias confirmam tendência positiva.</p></div></article><article class="panel decision" id="decisao"><div class="panel-head"><div><p class="eyebrow">Decisão do ciclo</p><h2>Postura do sistema</h2></div><span id="next-review">Ciclo · 3 min</span></div><div id="decision-list" class="decision-list"></div><div class="risk-line"><span>Protecção de capital</span><strong id="risk-pause">—</strong></div></article></section>
-          <section class="positions-section" id="exposicao"><div class="section-head"><div><p class="eyebrow">Posições</p><h2>Exposição actual</h2></div><p>Preços de mercado actualizados no painel. As posições só mudam quando a estratégia confirma o sinal.</p></div><div id="positions" class="positions"></div></section>
-          <section class="audit panel" id="auditoria"><div class="panel-head"><div><p class="eyebrow">Auditoria</p><h2>O que foi feito e porquê</h2></div><span id="operations-count">—</span></div><div id="ledger" class="ledger"></div></section>
+          <section class="intro compact"><p class="eyebrow">CAPITAL INICIAL €200,00 · CICLO 3 MIN · SEM DINHEIRO REAL</p><h1>Números da carteira.</h1></section>
+          <section class="headline-grid numbers" aria-label="Resumo financeiro"><article class="metric metric-primary"><p>Carteira actual</p><strong id="portfolio-value">—</strong><span id="portfolio-return">—</span></article><article class="metric"><p>P&amp;L total</p><strong id="total-pnl">—</strong><span id="total-pnl-pct">—</span></article><article class="metric"><p>Ganhos realizados</p><strong id="realized-gain">—</strong><span id="realized-loss">—</span></article><article class="metric"><p>P&amp;L em aberto</p><strong id="unrealized-pnl">—</strong><span id="unrealized-pct">—</span></article><article class="metric"><p>Custos</p><strong id="fees-total">—</strong><span id="operations-count">—</span></article><article class="metric risk-metric"><p>Drawdown máximo</p><strong id="drawdown">—</strong><span>pausa aos 15,00%</span></article></section>
+          <section class="content-grid"><article class="panel performance"><div class="panel-head"><div><p class="eyebrow">Evolução</p><h2>Valor da carteira</h2></div><span class="status active" id="system-status">Activo</span></div><div class="chart-wrap"><svg id="value-chart" viewBox="0 0 700 190" role="img" aria-label="Evolução do valor da carteira"><path id="chart-fill"></path><path id="chart-line"></path><line x1="0" y1="156" x2="700" y2="156"></line></svg><div class="chart-note"><span>INÍCIO<br /><b>€200,00</b></span><span>ACTUAL<br /><b id="chart-current">—</b></span></div></div></article><article class="panel decision" id="decisao"><div class="panel-head"><div><p class="eyebrow">Estado</p><h2>Exposição</h2></div><span id="next-review">3 min</span></div><div id="decision-list" class="decision-list"></div><div class="risk-line"><span>Caixa</span><strong id="cash-value">—</strong></div><div class="risk-line"><span>Limite de risco</span><strong id="risk-pause">—</strong></div></article></section>
+          <section class="positions-section" id="exposicao"><div class="section-head"><div><p class="eyebrow">Posições abertas</p><h2>Preço, custo e P&amp;L</h2></div><p>Valor marcado ao preço live. P&amp;L separado por activo.</p></div><div id="positions" class="positions"></div></section>
+          <section class="audit panel" id="auditoria"><div class="panel-head"><div><p class="eyebrow">Registo</p><h2>Operações executadas</h2></div></div><div id="ledger" class="ledger"></div></section>
         </main>
       </div>
-      <footer>OPUS CAPITAL LAB · SIMULAÇÃO EDUCATIVA · NÃO É RECOMENDAÇÃO FINANCEIRA</footer>
+      <footer>SIMULAÇÃO EDUCATIVA · NÃO É RECOMENDAÇÃO FINANCEIRA</footer>
     </div>
-    <script src="app.js?v=3"></script>
+    <script src="app.js?v=4"></script>
   </body>
 </html>
