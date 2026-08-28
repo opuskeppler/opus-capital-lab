@@ -56,22 +56,39 @@ function ledgerStats(entries, prices) {
   return { realized, unrealized, fees, buys, sells, byAsset };
 }
 
-function drawChart(entries) {
-  const values = entries.length ? entries.map(entry => entry.portfolio_value_eur) : [200];
+function chartHistory(entries, currentValue) {
+  const key = `opus-capital-history-${activeStrategy}`;
+  let local = [];
+  try { local = JSON.parse(localStorage.getItem(key) || '[]'); } catch (_) { local = []; }
+  const now = Date.now();
+  if (!local.length || now - local[local.length - 1].timestamp > 60000) {
+    local.push({ timestamp: now, value: currentValue });
+    local = local.slice(-180);
+    localStorage.setItem(key, JSON.stringify(local));
+  }
+  return [...entries.map(entry => ({ timestamp: Date.parse(entry.timestamp), value: entry.portfolio_value_eur })), ...local]
+    .sort((a, b) => a.timestamp - b.timestamp).slice(-180);
+}
+
+function drawChart(entries, currentValue) {
+  const history = chartHistory(entries, currentValue);
+  const values = history.length ? history.map(point => point.value) : [currentValue];
   if (values.length === 1) values.push(values[0]);
-  const min = Math.min(...values, 195), max = Math.max(...values, 205), range = max - min || 1;
+  const rawMin = Math.min(...values), rawMax = Math.max(...values);
+  const padding = Math.max((rawMax - rawMin) * 0.18, 0.015);
+  const min = rawMin - padding, max = rawMax + padding, range = max - min;
   const points = values.map((value, index) => `${(index / (values.length - 1)) * 700},${156 - ((value - min) / range) * 112}`).join(' ');
   document.querySelector('#chart-line').setAttribute('d', `M ${points.replace(' ', ' L ')}`);
   document.querySelector('#chart-fill').setAttribute('d', `M 0,156 L ${points.replace(' ', ' L ')} L 700,156 Z`);
 }
 
-function renderLedger(entries) {
+function renderLedger(entries, portfolio) {
   const operations = entries.flatMap(entry => entry.operations.map(op => ({ ...op, timestamp: entry.timestamp })));
   document.querySelector('#ledger').innerHTML = operations.length ? operations.slice().reverse().map(op => {
     const fee = money.format(op.fee_eur || 0);
     return `<div class="ledger-row"><time>${new Date(op.timestamp).toLocaleString('pt-PT', {dateStyle:'medium', timeStyle:'short'})}</time><span>${op.side === 'BUY' ? 'COMPRA' : 'VENDA'} ${dashboard.config.assets[op.asset].symbol} · ${money.format(op.eur)} · custo ${fee}</span><b class="${op.side === 'BUY' ? 'neutral' : ''}">${op.quantity.toFixed(6)} ${dashboard.config.assets[op.asset].symbol}</b></div>`;
   }).join('') : '<div class="ledger-row"><span>Sem operações.</span></div>';
-  drawChart(entries);
+  drawChart(entries, portfolio);
 }
 
 function setMetric(id, value, className = '') {
@@ -119,7 +136,7 @@ function render(prices, entries) {
     const pnlPct = item.cost ? item.pnl / item.cost * 100 : 0;
     return `<article class="position"><div class="symbol"><span class="coin-icon">${symbol.slice(0,1)}</span><span>${config.assets[asset].name.toUpperCase()}</span></div><h3>${money.format(item.value)}</h3><span class="quantity">${item.quantity.toFixed(6)} ${symbol}</span><div class="position-data"><span>CUSTO<b>${money.format(item.cost)}</b></span><span>PREÇO LIVE<b>${money.format(price)}</b></span><span>P&amp;L<b class="${tone(item.pnl)}">${signedMoney(item.pnl)} · ${signedPct(pnlPct)}</b></span></div></article>`;
   }).join('');
-  renderLedger(entries);
+  renderLedger(entries, portfolio);
 }
 
 function strategyValue(book, prices) {
