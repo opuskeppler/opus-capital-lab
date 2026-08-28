@@ -50,7 +50,7 @@ function render(prices, entries) {
   document.querySelector('#system-status').textContent = active ? 'Activo' : 'Pausa de risco';
   document.querySelector('#system-status').className = `status ${active ? 'active' : ''}`;
   document.querySelector('#risk-pause').textContent = active ? 'Dentro do limite' : 'Pausa activa';
-  document.querySelector('#next-review').textContent = 'Revisão diária';
+  document.querySelector('#next-review').textContent = 'Ciclo · 3 min';
 
   document.querySelector('#decision-list').innerHTML = assetIds.map(asset => {
     const analysis = snapshot.analysis[asset], symbol = config.assets[asset].symbol;
@@ -67,5 +67,5 @@ function render(prices, entries) {
 }
 
 Promise.all([fetch('data/dashboard.json', {cache:'no-store'}).then(r => r.json()), readLedger(), currentPrices()])
-  .then(([state, entries, prices]) => { dashboard = state; render(prices, entries); setInterval(() => currentPrices().then(next => render(next, entries)).catch(() => {}), 300000); })
+  .then(([state, entries, prices]) => { dashboard = state; render(prices, entries); setInterval(() => currentPrices().then(next => render(next, entries)).catch(() => {}), 180000); })
   .catch(error => { document.querySelector('#updated').textContent = 'Dados indisponíveis'; console.error(error); });

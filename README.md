@@ -11,7 +11,7 @@ Simulação auditável de uma carteira de €200 com preços reais, sem ligaçã
 - Custos simulados: 0,20% por operação
 - Sem alavancagem, derivados, short selling ou execução automática real
 
-O simulador avalia diariamente a tendência de cada activo por médias móveis de 20 e 60 dias. A carteira só assume exposição quando a tendência é positiva; mantém caixa se não houver sinal. Cada decisão e operação fica guardada em `logs/ledger.jsonl`.
+O simulador avalia a tendência de cada activo a cada três minutos por médias móveis de 20 e 60 dias. A carteira só assume exposição quando a tendência é positiva; mantém caixa se não houver sinal. Cada decisão e operação fica guardada em `logs/ledger.jsonl`. A passagem de cada ciclo não força uma operação: só compra ou vende quando as regras o justificam.
 
 ## Executar
 

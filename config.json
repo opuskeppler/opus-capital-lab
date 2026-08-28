@@ -4,6 +4,7 @@
   "fee_rate": 0.002,
   "max_asset_weight": 0.45,
   "minimum_trade_eur": 5.0,
+  "evaluation_interval_minutes": 3,
   "max_drawdown_pause": 0.15,
   "assets": {
     "bitcoin": {"symbol": "BTC", "name": "Bitcoin"},

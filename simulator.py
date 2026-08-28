@@ -37,7 +37,7 @@ def read_state() -> dict:
         "holdings": {asset: 0.0 for asset in CONFIG["assets"]},
         "peak_value_eur": starting,
         "max_drawdown": 0.0,
-        "last_rebalance_date": None,
+        "last_evaluation_at": None,
     }
 
 
@@ -118,17 +118,15 @@ def main() -> None:
     paused = drawdown >= CONFIG["max_drawdown_pause"]
     weights, analysis = target_weights(series, paused)
 
-    today = datetime.now(timezone.utc).date().isoformat()
-    operations = []
-    if state["last_rebalance_date"] != today:
-        operations = rebalance(state, prices, weights)
-        state["last_rebalance_date"] = today
+    now = datetime.now(timezone.utc)
+    operations = rebalance(state, prices, weights)
+    state["last_evaluation_at"] = now.isoformat()
 
     total = portfolio_value(state, prices)
     state["peak_value_eur"] = max(state["peak_value_eur"], total)
     STATE_PATH.write_text(json.dumps(state, indent=2, ensure_ascii=False), encoding="utf-8")
     entry = {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": now.isoformat(),
         "portfolio_value_eur": round(total, 2),
         "return_pct": round((total / CONFIG["starting_capital_eur"] - 1) * 100, 3),
         "drawdown_pct": round(drawdown * 100, 3),
@@ -153,7 +151,7 @@ def main() -> None:
         json.dumps(public_state, indent=2, ensure_ascii=False), encoding="utf-8"
     )
 
-    print(f"OPUS Crypto Paper Lab | {today}")
+    print(f"OPUS Crypto Paper Lab | {now.isoformat()}")
     print(f"Carteira: €{total:.2f} | Retorno: {entry['return_pct']:.2f}% | Drawdown: {entry['drawdown_pct']:.2f}%")
     print("Operações:", ", ".join(f"{op['side']} {op['asset']} €{op['eur']:.2f}" for op in operations) or "nenhuma")
     for asset, item in analysis.items():
