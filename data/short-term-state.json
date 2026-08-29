@@ -1,16 +1,16 @@
 {
   "started_at": "2026-08-28T19:41:23.654679+00:00",
-  "cash_eur": 198.6343640166928,
+  "cash_eur": 19.586502357700837,
   "holdings": {
-    "bitcoin": 0.0,
-    "ethereum": 0.0
+    "bitcoin": 0.0013329668740802764,
+    "ethereum": 0.042392815780993756
   },
   "entry_price": {
-    "bitcoin": 0.0,
-    "ethereum": 0.0
+    "bitcoin": 67057.52824441805,
+    "ethereum": 2106.607340060759
   },
-  "peak_value_eur": 200.0,
+  "peak_value_eur": 198.6343640166928,
   "max_drawdown": 0.005033935864702688,
-  "session_date": "2026-08-28",
-  "last_evaluation_at": "2026-08-28T23:38:05.882877+00:00"
+  "session_date": "2026-08-29",
+  "last_evaluation_at": "2026-08-29T05:39:10.407949+00:00"
 }
