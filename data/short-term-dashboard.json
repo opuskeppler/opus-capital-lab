@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T08:39:46.253920+00:00",
+  "generated_at": "2026-08-29T09:39:57.714568+00:00",
   "strategy": "short-term",
   "config": {
     "starting_capital_eur": 200.0,
@@ -18,58 +18,58 @@
   },
   "state": {
     "started_at": "2026-08-28T19:41:23.654679+00:00",
-    "cash_eur": 196.54101043319037,
+    "cash_eur": 19.38008553198317,
     "holdings": {
-      "bitcoin": 0.0,
-      "ethereum": 0.0
+      "bitcoin": 0.0013188985727209945,
+      "ethereum": 0.04202284790583433
     },
     "entry_price": {
-      "bitcoin": 0.0,
-      "ethereum": 0.0
+      "bitcoin": 67058.5718448915,
+      "ethereum": 2102.7574281428474
     },
     "peak_value_eur": 198.6343640166928,
-    "max_drawdown": 0.008752196491536357,
+    "max_drawdown": 0.010538728250095386,
     "session_date": "2026-08-29",
-    "last_evaluation_at": "2026-08-29T08:39:46.253920+00:00"
+    "last_evaluation_at": "2026-08-29T09:39:57.714568+00:00"
   },
   "snapshot": {
-    "timestamp": "2026-08-29T08:39:46.253920+00:00",
-    "portfolio_value_eur": 196.54,
-    "return_pct": -1.729,
-    "drawdown_pct": 0.875,
+    "timestamp": "2026-08-29T09:39:57.714568+00:00",
+    "portfolio_value_eur": 196.19,
+    "return_pct": -1.906,
+    "drawdown_pct": 1.054,
     "risk_pause": false,
     "analysis": {
       "bitcoin": {
-        "price_eur": 66937.372,
-        "fast_ma_eur": 66944.717,
-        "slow_ma_eur": 66957.4711,
-        "momentum_15": 0.00027,
-        "bullish": false
+        "price_eur": 67058.5718,
+        "fast_ma_eur": 67030.8758,
+        "slow_ma_eur": 66996.7442,
+        "momentum_15": 0.00128,
+        "bullish": true
       },
       "ethereum": {
-        "price_eur": 2100.7298,
-        "fast_ma_eur": 2101.36,
-        "slow_ma_eur": 2101.9456,
-        "momentum_15": -0.00073,
-        "bullish": false
+        "price_eur": 2102.7574,
+        "fast_ma_eur": 2102.1691,
+        "slow_ma_eur": 2101.4048,
+        "momentum_15": 0.00016,
+        "bullish": true
       }
     },
     "operations": [
       {
-        "side": "SELL",
+        "side": "BUY",
         "asset": "bitcoin",
-        "eur": 88.8,
+        "eur": 88.44,
         "fee_eur": 0.18,
-        "quantity": 0.0013265501879433984,
-        "reason": "SINAL"
+        "quantity": 0.0013188985727209945,
+        "reason": "ENTRADA"
       },
       {
-        "side": "SELL",
+        "side": "BUY",
         "asset": "ethereum",
-        "eur": 88.64,
+        "eur": 88.36,
         "fee_eur": 0.18,
-        "quantity": 0.04219367744869045,
-        "reason": "SINAL"
+        "quantity": 0.04202284790583433,
+        "reason": "ENTRADA"
       }
     ]
   }
