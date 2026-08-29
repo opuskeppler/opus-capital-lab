@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T11:40:22.482304+00:00",
+  "generated_at": "2026-08-29T12:34:06.294935+00:00",
   "strategy": "short-term",
   "config": {
     "starting_capital_eur": 200.0,
@@ -28,41 +28,32 @@
       "ethereum": 0.0
     },
     "peak_value_eur": 198.6343640166928,
-    "max_drawdown": 0.013294271485153053,
+    "max_drawdown": 0.014184574484835233,
     "session_date": "2026-08-29",
-    "last_evaluation_at": "2026-08-29T11:40:22.482304+00:00"
+    "last_evaluation_at": "2026-08-29T12:34:06.294935+00:00"
   },
   "snapshot": {
-    "timestamp": "2026-08-29T11:40:22.482304+00:00",
+    "timestamp": "2026-08-29T12:34:06.294935+00:00",
     "portfolio_value_eur": 195.82,
     "return_pct": -2.092,
-    "drawdown_pct": 1.329,
+    "drawdown_pct": 1.418,
     "risk_pause": false,
     "analysis": {
       "bitcoin": {
-        "price_eur": 67042.5967,
-        "fast_ma_eur": 67058.5067,
-        "slow_ma_eur": 67055.5697,
-        "momentum_15": -2e-05,
+        "price_eur": 66963.097,
+        "fast_ma_eur": 66977.3076,
+        "slow_ma_eur": 67007.7656,
+        "momentum_15": -0.0014,
         "bullish": false
       },
       "ethereum": {
-        "price_eur": 2103.2104,
-        "fast_ma_eur": 2103.8046,
-        "slow_ma_eur": 2102.9582,
-        "momentum_15": 2e-05,
+        "price_eur": 2102.4521,
+        "fast_ma_eur": 2102.8791,
+        "slow_ma_eur": 2103.1281,
+        "momentum_15": -0.00061,
         "bullish": false
       }
     },
-    "operations": [
-      {
-        "side": "SELL",
-        "asset": "bitcoin",
-        "eur": 88.42,
-        "fee_eur": 0.18,
-        "quantity": 0.0013188985727209945,
-        "reason": "SINAL"
-      }
-    ]
+    "operations": []
   }
 }
