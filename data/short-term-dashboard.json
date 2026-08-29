@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T13:43:37.115914+00:00",
+  "generated_at": "2026-08-29T13:49:36.977834+00:00",
   "strategy": "short-term",
   "config": {
     "starting_capital_eur": 200.0,
@@ -18,50 +18,50 @@
   },
   "state": {
     "started_at": "2026-08-28T19:41:23.654679+00:00",
-    "cash_eur": 195.14013503750238,
+    "cash_eur": 107.15144814909254,
     "holdings": {
-      "bitcoin": 0.0,
+      "bitcoin": 0.0013095384963972352,
       "ethereum": 0.0
     },
     "entry_price": {
-      "bitcoin": 0.0,
+      "bitcoin": 67056.49433633669,
       "ethereum": 0.0
     },
     "peak_value_eur": 198.6343640166928,
-    "max_drawdown": 0.0167056811944154,
+    "max_drawdown": 0.01759126119233223,
     "session_date": "2026-08-29",
-    "last_evaluation_at": "2026-08-29T13:43:37.115914+00:00"
+    "last_evaluation_at": "2026-08-29T13:49:36.977834+00:00"
   },
   "snapshot": {
-    "timestamp": "2026-08-29T13:43:37.115914+00:00",
-    "portfolio_value_eur": 195.14,
-    "return_pct": -2.43,
-    "drawdown_pct": 1.671,
+    "timestamp": "2026-08-29T13:49:36.977834+00:00",
+    "portfolio_value_eur": 194.96,
+    "return_pct": -2.518,
+    "drawdown_pct": 1.759,
     "risk_pause": false,
     "analysis": {
       "bitcoin": {
-        "price_eur": 67042.4139,
-        "fast_ma_eur": 67042.9321,
-        "slow_ma_eur": 66998.3149,
-        "momentum_15": 0.00164,
-        "bullish": false
+        "price_eur": 67056.4943,
+        "fast_ma_eur": 67041.1065,
+        "slow_ma_eur": 67006.294,
+        "momentum_15": 0.0015,
+        "bullish": true
       },
       "ethereum": {
-        "price_eur": 2101.5173,
-        "fast_ma_eur": 2101.4028,
-        "slow_ma_eur": 2101.338,
-        "momentum_15": -3e-05,
+        "price_eur": 2101.4475,
+        "fast_ma_eur": 2101.3515,
+        "slow_ma_eur": 2101.3269,
+        "momentum_15": -0.00024,
         "bullish": false
       }
     },
     "operations": [
       {
-        "side": "SELL",
+        "side": "BUY",
         "asset": "bitcoin",
-        "eur": 87.95,
+        "eur": 87.81,
         "fee_eur": 0.18,
-        "quantity": 0.0013119054752525321,
-        "reason": "SINAL"
+        "quantity": 0.0013095384963972352,
+        "reason": "ENTRADA"
       }
     ]
   }
