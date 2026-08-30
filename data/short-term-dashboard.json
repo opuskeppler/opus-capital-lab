@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T03:28:36.250594+00:00",
+  "generated_at": "2026-08-30T03:31:36.314544+00:00",
   "strategy": "short-term",
   "config": {
     "starting_capital_eur": 200.0,
@@ -18,49 +18,49 @@
   },
   "state": {
     "started_at": "2026-08-28T19:41:23.654679+00:00",
-    "cash_eur": 104.1386543102901,
+    "cash_eur": 18.67589718211987,
     "holdings": {
       "bitcoin": 0.0012658527176982023,
-      "ethereum": 0.0
+      "ethereum": 0.040185377269730115
     },
     "entry_price": {
       "bitcoin": 67420.17152833454,
-      "ethereum": 0.0
+      "ethereum": 2122.467887015506
     },
     "peak_value_eur": 192.361207204528,
     "max_drawdown": 0.03158142773139516,
     "session_date": "2026-08-30",
-    "last_evaluation_at": "2026-08-30T03:28:36.250594+00:00"
+    "last_evaluation_at": "2026-08-30T03:31:36.314544+00:00"
   },
   "snapshot": {
-    "timestamp": "2026-08-30T03:28:36.250594+00:00",
-    "portfolio_value_eur": 189.48,
-    "return_pct": -5.259,
-    "drawdown_pct": 1.408,
+    "timestamp": "2026-08-30T03:31:36.314544+00:00",
+    "portfolio_value_eur": 189.37,
+    "return_pct": -5.316,
+    "drawdown_pct": 1.468,
     "risk_pause": false,
     "analysis": {
       "bitcoin": {
-        "price_eur": 67420.1715,
-        "fast_ma_eur": 67410.9357,
-        "slow_ma_eur": 67407.0341,
-        "momentum_15": 0.00036,
+        "price_eur": 67464.0155,
+        "fast_ma_eur": 67419.7045,
+        "slow_ma_eur": 67409.957,
+        "momentum_15": 0.00101,
         "bullish": true
       },
       "ethereum": {
-        "price_eur": 2121.0751,
-        "fast_ma_eur": 2120.5227,
-        "slow_ma_eur": 2120.2614,
-        "momentum_15": -0.00034,
-        "bullish": false
+        "price_eur": 2122.4679,
+        "fast_ma_eur": 2120.8013,
+        "slow_ma_eur": 2120.3542,
+        "momentum_15": 0.00032,
+        "bullish": true
       }
     },
     "operations": [
       {
         "side": "BUY",
-        "asset": "bitcoin",
-        "eur": 85.34,
+        "asset": "ethereum",
+        "eur": 85.29,
         "fee_eur": 0.17,
-        "quantity": 0.0012658527176982023,
+        "quantity": 0.040185377269730115,
         "reason": "ENTRADA"
       }
     ]
