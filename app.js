@@ -110,6 +110,7 @@ function drawChart(entries, currentValue) {
   document.querySelector('#chart-x-end').textContent = chartDate(lastTimestamp);
   const windowLabel = { day: ['ÚLTIMAS 24H', 'dados disponíveis'], month: ['ÚLTIMOS 30 DIAS', 'dados disponíveis'], all: ['HISTÓRICO', 'desde o início'] }[chartRange];
   document.querySelector('#chart-window').innerHTML = `${windowLabel[0]}<br /><b>${windowLabel[1]}</b>`;
+  document.querySelector('#chart-range-status').textContent = `${windowLabel[0]} · ${history.length} REGISTOS`;
 }
 
 document.querySelectorAll('[data-chart-range]').forEach(button => {
