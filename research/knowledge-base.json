@@ -208,6 +208,38 @@
       "verdict": "Não justificam instalação agora. A Trend tem prioridade e os três acrescentam superfície técnica antes de provarem uma melhoria. Vibe-Trading HKUDS é o candidato mais forte para um piloto futuro de research/backtest; Fincept é uma alternativa de terminal quando o nosso dashboard deixar de chegar; VibeTradingLabs é apenas referência de arquitectura.",
       "activation_condition": "Só reabrir a avaliação se houver uma necessidade concreta que o laboratório actual não cubra: backtest multi-activo mais profundo, relatórios quant reproduzíveis ou uma bancada de pesquisa dedicada. Primeiro piloto sem credenciais, sem execução e com comparação objectiva contra o fluxo actual.",
       "execution_authority": "nenhuma"
+    },
+    {
+      "id": "2026-08-30-scrapling-web-data-collection",
+      "recorded_at": "2026-08-30T20:59:16+01:00",
+      "category": "recolha de dados web / investigação",
+      "title": "Scrapling — framework adaptativo de web scraping",
+      "materials": [
+        {"type": "página Notion enviada por Rodd", "url": "https://arthur-baggio.notion.site/Scrapling-3c841723fc77819d850bd376df1252cb", "observed": "A página não expôs conteúdo fora de uma sessão Notion; o tema foi confirmado pelo nome."},
+        {"type": "repositório oficial confirmado", "url": "https://github.com/D4Vinci/Scrapling", "license": "BSD-3-Clause", "verified_at": "2026-08-30", "observed": "Framework Python com fetch HTTP/browser, crawling, selecção resiliente, exportação, MCP e geração de Markdown para RAG."}
+      ],
+      "mechanism": "Recolhe e estrutura páginas web, com suporte a sessões, browser dinâmico, spiders, controlo de ritmo e selecção adaptativa quando a estrutura HTML muda.",
+      "fit_for_opus": {
+        "useful": [
+          "Monitorização permitida de fontes públicas, notícias, catálogos e páginas de concorrentes para pesquisa de mercado.",
+          "Criar corpus reproduzíveis para a base de conhecimento, com URL, data e conteúdo de origem.",
+          "Recolha de informação operacional em sites onde uma API oficial não exista e os termos o permitam."
+        ],
+        "not_suitable": [
+          "Contornar autenticação, paywalls, CAPTCHAs ou controlos de acesso.",
+          "Extrair dados pessoais, conteúdo privado ou violar os termos/robots de uma fonte.",
+          "Ser a fonte única de preços, decisões de carteira ou informação financeira crítica."
+        ]
+      },
+      "risks_and_limits": [
+        "O marketing de bypass anti-bot aumenta risco jurídico, de bloqueio e reputacional; não é uma capacidade a usar por defeito.",
+        "Sites mudam, limitam tráfego e podem retornar conteúdo incompleto; guardar proveniência e validar dados é obrigatório.",
+        "Crawls e browsers consomem recursos; precisam de âmbito, limites de taxa e objectivo definidos."
+      ],
+      "status": "Observado — radar",
+      "verdict": "Útil como ferramenta de investigação quando houver uma necessidade concreta de recolher fontes públicas de forma repetível. Não instalar como camada permanente agora: web_fetch, APIs e fontes RSS já cobrem o fluxo actual com menor superfície operacional.",
+      "activation_condition": "Activar uma prova limitada se uma pesquisa repetida for bloqueada pela ausência de API e a recolha for permitida pelos termos da fonte. Definir domínios, finalidade, frequência, limite de taxa e formato de auditoria antes de correr.",
+      "execution_authority": "nenhuma"
     }
   ]
 }
