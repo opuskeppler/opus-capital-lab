@@ -139,71 +139,6 @@ function render(prices, entries) {
   renderLedger(entries, portfolio);
 }
 
-function strategyValue(book, prices) {
-  return book.state.cash_eur + assetIds.reduce((sum, asset) => sum + book.state.holdings[asset] * prices[asset].eur, 0);
-}
-
-function renderStrategySummary(prices) {
-  [['trend', '#trend-summary']].forEach(([key, selector]) => {
-    const book = dashboards[key];
-    const pnl = strategyValue(book, prices) - book.config.starting_capital_eur;
-    const el = document.querySelector(selector);
-    el.textContent = signedMoney(pnl);
-    el.className = tone(pnl);
-  });
-}
-
-function setStandardDashboardVisibility(visible) {
-  document.querySelectorAll('.headline-grid, .content-grid, .positions-section, .audit')
-    .forEach(section => { section.hidden = !visible; });
-  document.querySelector('#v2-research').hidden = visible;
-}
-
-function renderV2(shadow, research, history, backtest) {
-  const assets = Object.values(history.assets || {});
-  const complete = assets.length && assets.every(asset => asset.complete);
-  document.querySelector('#v2-history').textContent = complete ? '24 meses' : 'A validar';
-  document.querySelector('#v2-history-detail').textContent = assets.length
-    ? `${assets.map(asset => `${asset.candles.toLocaleString('pt-PT')}h`).join(' · ')} · sem lacunas`
-    : 'Histórico indisponível';
-  document.querySelector('#v2-source').textContent = research.market.bitcoin.source || '—';
-  const sentiment = research.sentiment.current;
-  document.querySelector('#v2-sentiment').textContent = `${sentiment.value} · ${sentiment.value_classification}`;
-  document.querySelector('#v2-news').textContent = `${research.news.risk_headlines.length}/${research.news.items_scanned} manchetes de risco`;
-  const failed = backtest.combined_return_pct < 0;
-  document.querySelector('#v2-validation').textContent = `${backtest.combined_return_pct.toFixed(2)}%`;
-  document.querySelector('#v2-validation').className = failed ? 'negative' : 'positive';
-  document.querySelector('#v2-validation-detail').textContent = `${backtest.assets.bitcoin.operations + backtest.assets.ethereum.operations} operações · custos incluídos`;
-  const status = document.querySelector('#v2-status');
-  status.textContent = failed ? 'Reprovada · sem execução' : 'Shadow · sem execução';
-  status.className = `status ${failed ? 'negative' : ''}`;
-  document.querySelector('#v2-method-text').textContent = failed
-    ? 'O baseline perdeu 80,86% em 24 meses e gerou 2.928 operações. Está bloqueado: a próxima versão terá de reduzir turnover, incluir um filtro de regime mais forte e superar buy-and-hold depois de custos.'
-    : 'O modelo só propõe entrada acima de 65%, com tendência confirmada, risco noticioso baixo e tamanho limitado por volatilidade. Até à validação, esta área é informativa: não compra nem vende.';
-  document.querySelector('#v2-signals').innerHTML = Object.entries(shadow.signals).map(([asset, signal]) => {
-    const market = research.market[asset];
-    const symbol = asset === 'bitcoin' ? 'BTC' : 'ETH';
-    return `<article class="v2-signal"><div class="v2-signal-top"><strong>${symbol}</strong><b>${(signal.probability_positive_next_24h * 100).toFixed(0)}% · ${signal.decision === 'cash' ? 'CAIXA' : 'CANDIDATO'}</b></div><p>24h: ${signedPct(market.return_24h * 100)} · Vol. 24h: ${(market.realized_volatility_24h * 100).toFixed(2)}%<br>${signal.reasons.join(' · ')}</p></article>`;
-  }).join('');
-  document.querySelector('#updated').textContent = `RESEARCH · ${new Date(research.generated_at).toLocaleString('pt-PT', {dateStyle:'short', timeStyle:'short'})}`;
-}
-
-function selectStrategy(key, prices) {
-  activeStrategy = key;
-  document.querySelectorAll('.strategy-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.strategy === key));
-  history.replaceState(null, '', `#${key}`);
-  if (key === 'short-term-v2') {
-    setStandardDashboardVisibility(false);
-    renderV2(dashboards['short-term-v2'], dashboards.research, dashboards.history, dashboards.backtest);
-    return;
-  }
-  setStandardDashboardVisibility(true);
-  dashboard = dashboards[key];
-  const entries = dashboards[`${key}-entries`];
-  renderStrategySummary(prices);
-  render(prices, entries);
-}
-
 function startRefreshCountdown() {
   const target = Date.now() + REFRESH_INTERVAL_MS;
   const label = document.querySelector('#refresh-countdown');
@@ -219,18 +154,13 @@ function startRefreshCountdown() {
 }
 
 Promise.all([
-  fetch('data/dashboard.json', {cache:'no-store'}).then(r => r.json()), readLedger(), currentPrices(),
-  fetch('data/short-term-v2-shadow.json', {cache:'no-store'}).then(r => r.json()),
-  fetch('data/research-snapshot.json', {cache:'no-store'}).then(r => r.json()),
-  fetch('data/historical/manifest.json', {cache:'no-store'}).then(r => r.json()),
-  fetch('data/short-term-v2-backtest.json', {cache:'no-store'}).then(r => r.json())
+  fetch('data/dashboard.json', {cache:'no-store'}).then(r => r.json()), readLedger(), currentPrices()
 ])
-  .then(([trend, trendEntries, prices, shortTermV2, research, history, backtest]) => {
-    dashboards = {trend, 'trend-entries': trendEntries, 'short-term-v2': shortTermV2, research, history, backtest};
+  .then(([trend, trendEntries, prices]) => {
+    dashboards = {trend, 'trend-entries': trendEntries};
     marketPrices = prices;
-    document.querySelectorAll('.strategy-tab').forEach(tab => tab.addEventListener('click', () => selectStrategy(tab.dataset.strategy, marketPrices)));
-    const selected = location.hash.slice(1);
-    selectStrategy(['trend', 'short-term-v2'].includes(selected) ? selected : 'trend', prices);
+    dashboard = trend;
+    render(prices, trendEntries);
     startRefreshCountdown();
   })
   .catch(error => { document.querySelector('#updated').textContent = 'Dados indisponíveis'; console.error(error); });
