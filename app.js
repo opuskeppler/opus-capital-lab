@@ -4,6 +4,9 @@ let dashboard;
 let dashboards;
 let activeStrategy = 'trend';
 let marketPrices;
+let chartRange = 'all';
+let chartEntries = [];
+let chartCurrentValue = 0;
 const REFRESH_INTERVAL_MS = 180000;
 
 const signedMoney = value => `${value >= 0 ? '+' : '−'}${money.format(Math.abs(value))}`;
@@ -74,8 +77,17 @@ function chartDate(timestamp) {
   return new Date(timestamp).toLocaleString('pt-PT', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).replace(',', '');
 }
 
+function chartWindow(history) {
+  if (chartRange === 'all') return history;
+  const cutoff = Date.now() - (chartRange === 'day' ? 24 : 30 * 24) * 60 * 60 * 1000;
+  const visible = history.filter(point => point.timestamp >= cutoff);
+  return visible.length ? visible : history.slice(-1);
+}
+
 function drawChart(entries, currentValue) {
-  const history = chartHistory(entries, currentValue);
+  chartEntries = entries;
+  chartCurrentValue = currentValue;
+  const history = chartWindow(chartHistory(entries, currentValue));
   const values = history.length ? history.map(point => point.value) : [currentValue];
   if (values.length === 1) values.push(values[0]);
   const rawMin = Math.min(...values), rawMax = Math.max(...values);
@@ -96,7 +108,17 @@ function drawChart(entries, currentValue) {
   document.querySelector('#chart-x-start').textContent = chartDate(firstTimestamp);
   document.querySelector('#chart-x-middle').textContent = chartDate(firstTimestamp + duration / 2);
   document.querySelector('#chart-x-end').textContent = chartDate(lastTimestamp);
+  const windowLabel = { day: ['ÚLTIMAS 24H', 'dados disponíveis'], month: ['ÚLTIMOS 30 DIAS', 'dados disponíveis'], all: ['HISTÓRICO', 'desde o início'] }[chartRange];
+  document.querySelector('#chart-window').innerHTML = `${windowLabel[0]}<br /><b>${windowLabel[1]}</b>`;
 }
+
+document.querySelectorAll('[data-chart-range]').forEach(button => {
+  button.addEventListener('click', () => {
+    chartRange = button.dataset.chartRange;
+    document.querySelectorAll('[data-chart-range]').forEach(item => item.classList.toggle('active', item === button));
+    if (chartEntries.length) drawChart(chartEntries, chartCurrentValue);
+  });
+});
 
 function renderLedger(entries, portfolio) {
   const operations = entries.flatMap(entry => entry.operations.map(op => ({ ...op, timestamp: entry.timestamp })));
