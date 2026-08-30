@@ -1,0 +1,26 @@
+{
+  "method": "fixed v2 factor baseline; 24-month hourly walk-forward simulation with 0.20% fee",
+  "warning": "News and sentiment are deliberately excluded: no point-in-time historical archive yet.",
+  "assets": {
+    "bitcoin": {
+      "start_capital_eur": 100,
+      "final_value_eur": 16.81,
+      "return_pct": -83.19,
+      "buy_hold_return_pct": 14.76,
+      "max_drawdown_pct": 83.54,
+      "fees_eur": 87.8,
+      "operations": 1472
+    },
+    "ethereum": {
+      "start_capital_eur": 100,
+      "final_value_eur": 21.56,
+      "return_pct": -78.44,
+      "buy_hold_return_pct": -10.6,
+      "max_drawdown_pct": 79.74,
+      "fees_eur": 95.71,
+      "operations": 1456
+    }
+  },
+  "combined_final_eur": 38.37,
+  "combined_return_pct": -80.81
+}

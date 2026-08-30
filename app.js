@@ -144,7 +144,7 @@ function strategyValue(book, prices) {
 }
 
 function renderStrategySummary(prices) {
-  [['trend', '#trend-summary'], ['short-term', '#short-term-summary']].forEach(([key, selector]) => {
+  [['trend', '#trend-summary']].forEach(([key, selector]) => {
     const book = dashboards[key];
     const pnl = strategyValue(book, prices) - book.config.starting_capital_eur;
     const el = document.querySelector(selector);
@@ -159,7 +159,7 @@ function setStandardDashboardVisibility(visible) {
   document.querySelector('#v2-research').hidden = visible;
 }
 
-function renderV2(shadow, research, history) {
+function renderV2(shadow, research, history, backtest) {
   const assets = Object.values(history.assets || {});
   const complete = assets.length && assets.every(asset => asset.complete);
   document.querySelector('#v2-history').textContent = complete ? '24 meses' : 'A validar';
@@ -170,10 +170,16 @@ function renderV2(shadow, research, history) {
   const sentiment = research.sentiment.current;
   document.querySelector('#v2-sentiment').textContent = `${sentiment.value} · ${sentiment.value_classification}`;
   document.querySelector('#v2-news').textContent = `${research.news.risk_headlines.length}/${research.news.items_scanned} manchetes de risco`;
-  document.querySelector('#v2-validation').textContent = shadow.calibration_status.startsWith('uncalibrated') ? 'Pendente' : 'Em curso';
+  const failed = backtest.combined_return_pct < 0;
+  document.querySelector('#v2-validation').textContent = `${backtest.combined_return_pct.toFixed(2)}%`;
+  document.querySelector('#v2-validation').className = failed ? 'negative' : 'positive';
+  document.querySelector('#v2-validation-detail').textContent = `${backtest.assets.bitcoin.operations + backtest.assets.ethereum.operations} operações · custos incluídos`;
   const status = document.querySelector('#v2-status');
-  status.textContent = 'Shadow · sem execução';
-  status.className = 'status';
+  status.textContent = failed ? 'Reprovada · sem execução' : 'Shadow · sem execução';
+  status.className = `status ${failed ? 'negative' : ''}`;
+  document.querySelector('#v2-method-text').textContent = failed
+    ? 'O baseline perdeu 80,86% em 24 meses e gerou 2.928 operações. Está bloqueado: a próxima versão terá de reduzir turnover, incluir um filtro de regime mais forte e superar buy-and-hold depois de custos.'
+    : 'O modelo só propõe entrada acima de 65%, com tendência confirmada, risco noticioso baixo e tamanho limitado por volatilidade. Até à validação, esta área é informativa: não compra nem vende.';
   document.querySelector('#v2-signals').innerHTML = Object.entries(shadow.signals).map(([asset, signal]) => {
     const market = research.market[asset];
     const symbol = asset === 'bitcoin' ? 'BTC' : 'ETH';
@@ -188,7 +194,7 @@ function selectStrategy(key, prices) {
   history.replaceState(null, '', `#${key}`);
   if (key === 'short-term-v2') {
     setStandardDashboardVisibility(false);
-    renderV2(dashboards['short-term-v2'], dashboards.research, dashboards.history);
+    renderV2(dashboards['short-term-v2'], dashboards.research, dashboards.history, dashboards.backtest);
     return;
   }
   setStandardDashboardVisibility(true);
@@ -213,21 +219,18 @@ function startRefreshCountdown() {
 }
 
 Promise.all([
-  fetch('data/dashboard.json', {cache:'no-store'}).then(r => r.json()), readLedger(),
-  fetch('data/short-term-dashboard.json', {cache:'no-store'}).then(r => r.json()),
-  fetch('logs/short-term-ledger.jsonl', {cache:'no-store'}).then(r => r.ok ? r.text() : '').then(text => text.trim().split('\n').filter(Boolean).map(line => JSON.parse(line))),
-  currentPrices(),
+  fetch('data/dashboard.json', {cache:'no-store'}).then(r => r.json()), readLedger(), currentPrices(),
   fetch('data/short-term-v2-shadow.json', {cache:'no-store'}).then(r => r.json()),
   fetch('data/research-snapshot.json', {cache:'no-store'}).then(r => r.json()),
-  fetch('data/historical/manifest.json', {cache:'no-store'}).then(r => r.json())
+  fetch('data/historical/manifest.json', {cache:'no-store'}).then(r => r.json()),
+  fetch('data/short-term-v2-backtest.json', {cache:'no-store'}).then(r => r.json())
 ])
-  .then(([trend, trendEntries, shortTerm, shortEntries, prices, shortTermV2, research, history]) => {
-    dashboards = {trend, 'short-term': shortTerm, 'trend-entries': trendEntries, 'short-term-entries': shortEntries,
-      'short-term-v2': shortTermV2, research, history};
+  .then(([trend, trendEntries, prices, shortTermV2, research, history, backtest]) => {
+    dashboards = {trend, 'trend-entries': trendEntries, 'short-term-v2': shortTermV2, research, history, backtest};
     marketPrices = prices;
     document.querySelectorAll('.strategy-tab').forEach(tab => tab.addEventListener('click', () => selectStrategy(tab.dataset.strategy, marketPrices)));
     const selected = location.hash.slice(1);
-    selectStrategy(['trend', 'short-term', 'short-term-v2'].includes(selected) ? selected : 'trend', prices);
+    selectStrategy(['trend', 'short-term-v2'].includes(selected) ? selected : 'trend', prices);
     startRefreshCountdown();
   })
   .catch(error => { document.querySelector('#updated').textContent = 'Dados indisponíveis'; console.error(error); });
