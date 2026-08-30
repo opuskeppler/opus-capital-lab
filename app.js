@@ -67,7 +67,11 @@ function chartHistory(entries, currentValue) {
     localStorage.setItem(key, JSON.stringify(local));
   }
   return [...entries.map(entry => ({ timestamp: Date.parse(entry.timestamp), value: entry.portfolio_value_eur })), ...local]
-    .sort((a, b) => a.timestamp - b.timestamp).slice(-180);
+    .sort((a, b) => a.timestamp - b.timestamp);
+}
+
+function chartDate(timestamp) {
+  return new Date(timestamp).toLocaleString('pt-PT', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).replace(',', '');
 }
 
 function drawChart(entries, currentValue) {
@@ -77,9 +81,21 @@ function drawChart(entries, currentValue) {
   const rawMin = Math.min(...values), rawMax = Math.max(...values);
   const padding = Math.max((rawMax - rawMin) * 0.18, 0.015);
   const min = rawMin - padding, max = rawMax + padding, range = max - min;
-  const points = values.map((value, index) => `${(index / (values.length - 1)) * 700},${156 - ((value - min) / range) * 112}`).join(' ');
+  const firstTimestamp = history[0]?.timestamp || Date.now();
+  const lastTimestamp = history[history.length - 1]?.timestamp || firstTimestamp;
+  const duration = Math.max(lastTimestamp - firstTimestamp, 1);
+  const points = history.map((point, index) => {
+    const x = history.length === 1 ? 0 : ((point.timestamp - firstTimestamp) / duration) * 700;
+    return `${x},${156 - ((point.value - min) / range) * 112}`;
+  }).join(' ');
   document.querySelector('#chart-line').setAttribute('d', `M ${points.replace(' ', ' L ')}`);
   document.querySelector('#chart-fill').setAttribute('d', `M 0,156 L ${points.replace(' ', ' L ')} L 700,156 Z`);
+  document.querySelector('#chart-y-max').textContent = money.format(max);
+  document.querySelector('#chart-y-mid').textContent = money.format((max + min) / 2);
+  document.querySelector('#chart-y-min').textContent = money.format(min);
+  document.querySelector('#chart-x-start').textContent = chartDate(firstTimestamp);
+  document.querySelector('#chart-x-middle').textContent = chartDate(firstTimestamp + duration / 2);
+  document.querySelector('#chart-x-end').textContent = chartDate(lastTimestamp);
 }
 
 function renderLedger(entries, portfolio) {
