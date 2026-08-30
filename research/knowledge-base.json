@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "purpose": "Registo auditável de materiais recebidos sobre investimentos, estratégias e IA. Conteúdo promocional ou demonstrações são evidência de capacidade alegada, nunca de rentabilidade.",
+  "items": [
+    {
+      "id": "2026-08-30-tradingview-mcp-bridge",
+      "recorded_at": "2026-08-30T19:23:15+01:00",
+      "category": "ferramenta de investigação / IA para análise técnica",
+      "title": "TradingView MCP Bridge — controlo local do TradingView Desktop por agente de IA",
+      "materials": [
+        {
+          "type": "vídeo e captura de ecrã enviados por Rodd",
+          "summary": "A publicação da Girsta alega que Claude Code controla TradingView Desktop através do Chrome DevTools Protocol (CDP), para ler gráficos, mudar símbolos e períodos, escrever Pine Script, replay, alertas, desenhos, screenshots e layouts."
+        },
+        {
+          "type": "repositório confirmado",
+          "url": "https://github.com/tradesdontlie/tradingview-mcp",
+          "verified_at": "2026-08-30",
+          "observed": "O README confirma ponte local por CDP, dependência de TradingView Desktop e subscrição válida, e declara que não executa trades reais."
+        }
+      ],
+      "mechanism": "Um servidor Model Context Protocol (MCP) comunica com uma instância local do TradingView Desktop iniciada com porta de depuração CDP. Expõe comandos para leitura/navegação de gráfico, Pine Script, replay, alertas, capturas e monitorização local.",
+      "fit_for_opus": {
+        "useful": [
+          "Desenvolver e compilar indicadores Pine Script para tornar regras da Trend visíveis e auditáveis.",
+          "Reproduzir e inspeccionar períodos históricos no TradingView como verificação visual complementar aos backtests locais.",
+          "Criar dashboards e alertas de contexto para revisão humana."
+        ],
+        "not_suitable": [
+          "Fonte primária dos nossos preços ou histórico: já usamos séries reproduzíveis e auditáveis da Binance.",
+          "Execução automática, recomendações de compra/venda ou alteração das regras da Trend sem backtest independente.",
+          "Prova de que uma estratégia tem vantagem estatística."
+        ]
+      },
+      "evidence": {
+        "supports": [
+          "A documentação descreve as capacidades e os pré-requisitos técnicos.",
+          "O repositório estava público e activo na data de verificação."
+        ],
+        "does_not_support": [
+          "Não apresenta retorno, drawdown, custos ou validação fora da amostra de qualquer estratégia.",
+          "Não demonstra robustez operacional após actualizações do TradingView.",
+          "Popularidade do repositório não é auditoria de segurança nem qualidade de sinal."
+        ]
+      },
+      "risks_and_limits": [
+        "Usa interfaces internas e não documentadas do TradingView; pode quebrar com actualizações.",
+        "Exige a porta de depuração local; mantê-la apenas em localhost e nunca exposta à rede.",
+        "Automatizar consumo de dados do TradingView pode ter implicações nos termos de utilização; confirmar antes de uso contínuo.",
+        "O agente pode alterar o estado visual do gráfico e alertas; separar perfil de investigação de qualquer ambiente operacional."
+      ],
+      "status": "Observado",
+      "verdict": "Interessante como bancada de investigação e interface visual para a Trend; demasiado frágil para ser dependência central ou operacional.",
+      "next_action": "Não instalar já. Se for necessário acelerar o desenvolvimento de Pine Script ou revisão visual, fazer uma prova isolada: instalação em perfil separado, health-check, leitura de BTC/EUR, captura de ecrã e teste de um indicador sem criar alertas nem tocar em execução.",
+      "execution_authority": "nenhuma"
+    },
+    {
+      "id": "2026-08-30-kronos-financial-foundation-model",
+      "recorded_at": "2026-08-30T19:28:50+01:00",
+      "category": "modelo fundacional para séries temporais financeiras / IA preditiva",
+      "title": "Kronos — A Foundation Model for the Language of Financial Markets",
+      "materials": [
+        {
+          "type": "capturas de ecrã enviadas por Rodd",
+          "claims": [
+            "Modelo open source para mercados financeiros.",
+            "Licença MIT.",
+            "Treino com dados de mais de 45 bolsas.",
+            "Prevê probabilidades, não certezas.",
+            "Aceite na AAAI 2026 e associado a investigadores da Universidade Tsinghua."
+          ]
+        },
+        {
+          "type": "código e artigo confirmados",
+          "repository": "https://github.com/shiyu-coder/Kronos",
+          "paper": "https://arxiv.org/abs/2508.02739",
+          "verified_at": "2026-08-30"
+        }
+      ],
+      "mechanism": "Família de transformadores autoregressivos para velas OHLCV. Primeiro converte dados contínuos em tokens discretos hierárquicos; depois prevê trajectórias futuras por amostragem. Os pesos públicos incluem versões mini, small e base; o contexto das versões small/base é limitado a 512 velas.",
+      "verification": {
+        "confirmed": [
+          "O repositório é público e a licença do código é MIT.",
+          "O artigo no arXiv descreve treino em mais de 12 mil milhões de registos K-line provenientes de 45 bolsas globais.",
+          "O artigo declara melhorias de RankIC e erro de volatilidade em benchmarks, e o repositório disponibiliza previsão e fine-tuning."
+        ],
+        "not_independently_confirmed": [
+          "A alegação de ser o primeiro modelo fundacional open source para mercados é promocional e não é uma métrica que determine utilidade.",
+          "A aceitação na AAAI 2026 aparece no README do projecto; antes de a tratar como prova académica, confirmar nos proceedings oficiais.",
+          "A filiação Tsinghua não foi confirmada a partir das fontes técnicas consultadas nesta ficha.",
+          "Os dados de treino completos e a sua qualidade não são uma fonte reproduzível para nós; tratam-se de uma alegação dos autores."
+        ]
+      },
+      "fit_for_opus": {
+        "potential_use": "Gerar previsões probabilísticas de horizonte curto e de volatilidade como uma feature experimental, em paralelo com o nosso modelo de regime Trend — nunca como decisão isolada.",
+        "important_constraint": "Uma previsão de preço com bom erro médio ou RankIC não equivale a estratégia rentável. Para a carteira importam retorno líquido, turnover, custos, drawdown, estabilidade entre regimes e calibração real das probabilidades.",
+        "why_not_now": "A short-term v2 já demonstrou que sinais horários podem parecer informativos e ainda assim perder 80,81% após custos. Integrar Kronos sem walk-forward separado apenas adicionaria complexidade e risco de sobreajuste."
+      },
+      "test_design_if_approved": [
+        "Usar apenas BTC/EUR e ETH/EUR do nosso histórico de 24 meses, sem usar informação futura.",
+        "Separar cronologicamente treino, validação e teste final; o período final fica selado até ao fim.",
+        "Avaliar previsão direccional e calibração por probabilidade antes de transformar a saída em sinal.",
+        "Criar uma regra de baixa frequência que combine previsão, filtro Trend e limite de volatilidade; aplicar taxas e slippage reais.",
+        "Comparar contra caixa, buy-and-hold e a Trend actual. Rejeitar se não superar os benchmarks de forma estável fora da amostra."
+      ],
+      "risks_and_limits": [
+        "Dados OHLCV não incluem por si só notícias, liquidez de livro, spreads ou eventos de ruptura.",
+        "O modelo pode aprender regularidades históricas que desaparecem; mercados não são estacionários.",
+        "Modelos generativos podem produzir trajectórias visualmente convincentes sem vantagem económica.",
+        "Fine-tuning requer computação, rigor de dados e governação de experiências; não é um atalho para alpha."
+      ],
+      "status": "Hipótese",
+      "verdict": "É uma referência técnica séria para investigação, mais credível do que um robô de marketing, mas não há evidência suficiente para o promover a estratégia. Só merece uma experiência isolada e comparável à Trend.",
+      "next_action": "Manter em observação. Fazer um pequeno teste zero-shot, somente de previsão e sem decisões de carteira, quando a Trend tiver uma base de acompanhamento suficiente. Não instalar pesos nem alterar o dashboard operacional agora.",
+      "execution_authority": "nenhuma"
+    },
+    {
+      "id": "2026-08-30-mirofish-social-simulation",
+      "recorded_at": "2026-08-30T19:37:05+01:00",
+      "category": "simulação social multi-agente / investigação qualitativa",
+      "title": "MiroFish — piloto de Simulação Social para contexto de BTC e ETH",
+      "materials": [
+        {
+          "type": "repositório confirmado",
+          "url": "https://github.com/666ghj/MiroFish",
+          "verified_at": "2026-08-30",
+          "observed": "O projecto descreve a ingestão de materiais, construção de grafo, agentes com memória e geração de relatório de cenários. A instalação requer fornecedor de LLM e Zep Cloud."
+        }
+      ],
+      "mechanism": "A partir de fontes datadas, representa actores e relações, simula interacções e devolve cenários narrativos. Para este laboratório, a função é mapear reacções sociais e riscos qualitativos — não estimar retorno ou preço.",
+      "fit_for_opus": {
+        "useful": [
+          "Organizar cenários alternativos após notícias, decisões regulatórias ou eventos macro.",
+          "Explicitar actores, pressupostos, consenso, divergências e informação em falta.",
+          "Criar um relatório auditável que complemente a leitura humana da Trend."
+        ],
+        "not_suitable": [
+          "Previsão de preço, preço-alvo, sinal de compra/venda ou decisão autónoma.",
+          "Alterar posições, regras da Trend ou qualquer execução de carteira.",
+          "Substituir backtests quantitativos, dados de mercado ou validação fora da amostra."
+        ]
+      },
+      "risks_and_limits": [
+        "Uma simulação pode produzir narrativas persuasivas sem capacidade preditiva mensurável.",
+        "Os resultados dependem da selecção de fontes, personas, fornecedor de modelo e parâmetros de execução.",
+        "O projecto tem dependências e custos externos; não instalar nem executar sem configuração explícita e revisão de segurança."
+      ],
+      "status": "Piloto isolado",
+      "verdict": "Vale como camada de cenários e risco qualitativo, desde que todo o resultado seja apresentado como Simulação Social e nunca como forecast ou sinal.",
+      "next_action": "Recolher um primeiro conjunto de fontes datadas para BTC/ETH; definir actores e uma data de corte; executar somente depois da configuração explícita do fornecedor de modelo; avaliar retrospectivamente se os alertas eram úteis.",
+      "execution_authority": "nenhuma"
+    }
+  ]
+}

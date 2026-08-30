@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#090b0d" />
     <title>Carteira · Simulação</title>
-    <link rel="stylesheet" href="styles.css?v=7" />
+    <link rel="stylesheet" href="styles.css?v=8" />
   </head>
   <body>
     <div class="app-shell">
@@ -20,6 +20,13 @@
         <main id="top">
           <section class="intro compact"><p class="eyebrow">CAPITAL INICIAL €200,00 · CICLO 3 MIN · SEM DINHEIRO REAL</p><h1>Números da carteira.</h1></section>
           <section class="strategy-note focus-note">Estratégia activa: <b>Trend</b> · avaliação diária · 90% máximo em exposição · sem alavancagem.</section>
+          <section class="social-simulation" id="simulacao-social" aria-labelledby="social-title">
+            <div class="social-head"><div><p class="eyebrow">MiroFish · modo observação</p><h2 id="social-title">Simulação Social</h2></div><span class="social-status" id="social-status">A preparar</span></div>
+            <p class="social-warning">Cenários exploratórios gerados por agentes. Não é previsão de preço, recomendação financeira, sinal de compra/venda ou instrução de execução.</p>
+            <div class="social-grid"><article><span>ÂMBITO</span><b id="social-scope">—</b></article><article><span>ESTADO</span><b id="social-stage">—</b></article><article><span>ÚLTIMA EXECUÇÃO</span><b id="social-run">—</b></article></div>
+            <div class="social-summary" id="social-summary">A carregar configuração da simulação social…</div>
+            <p class="social-foot" id="social-guardrails"></p>
+          </section>
           <section class="headline-grid numbers" aria-label="Resumo financeiro"><article class="metric metric-primary"><p>Carteira actual</p><strong id="portfolio-value">—</strong><span id="portfolio-return">—</span></article><article class="metric"><p>P&amp;L total</p><strong id="total-pnl">—</strong><span id="total-pnl-pct">—</span></article><article class="metric"><p>Ganhos realizados</p><strong id="realized-gain">—</strong><span id="realized-loss">—</span></article><article class="metric"><p>P&amp;L em aberto</p><strong id="unrealized-pnl">—</strong><span id="unrealized-pct">—</span></article><article class="metric"><p>Custos</p><strong id="fees-total">—</strong><span id="operations-count">—</span></article><article class="metric risk-metric"><p>Drawdown máximo</p><strong id="drawdown">—</strong><span>pausa aos 15,00%</span></article></section>
           <section class="content-grid"><article class="panel performance"><div class="panel-head"><div><p class="eyebrow">Evolução</p><h2>Valor da carteira</h2></div><span class="status active" id="system-status">Activo</span></div><div class="chart-wrap"><svg id="value-chart" viewBox="0 0 700 190" role="img" aria-label="Evolução do valor da carteira"><path id="chart-fill"></path><path id="chart-line"></path><line x1="0" y1="156" x2="700" y2="156"></line></svg><div class="chart-note"><span>INÍCIO<br /><b>€200,00</b></span><span>ACTUAL<br /><b id="chart-current">—</b></span></div></div></article><article class="panel decision" id="decisao"><div class="panel-head"><div><p class="eyebrow">Estado</p><h2>Exposição</h2></div><span id="next-review">3 min</span></div><div id="decision-list" class="decision-list"></div><div class="risk-line"><span>Caixa</span><strong id="cash-value">—</strong></div><div class="risk-line"><span>Limite de risco</span><strong id="risk-pause">—</strong></div></article></section>
           <section class="positions-section" id="exposicao"><div class="section-head"><div><p class="eyebrow">Posições abertas</p><h2>Preço, custo e P&amp;L</h2></div><p>Valor marcado ao preço live. P&amp;L separado por activo.</p></div><div id="positions" class="positions"></div></section>
@@ -28,6 +35,6 @@
       </div>
       <footer>SIMULAÇÃO EDUCATIVA · NÃO É RECOMENDAÇÃO FINANCEIRA</footer>
     </div>
-    <script src="app.js?v=10"></script>
+      <script src="app.js?v=11"></script>
   </body>
 </html>

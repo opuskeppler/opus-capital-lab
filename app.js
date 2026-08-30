@@ -97,6 +97,15 @@ function setMetric(id, value, className = '') {
   el.className = className;
 }
 
+function renderSocialSimulation(simulation) {
+  document.querySelector('#social-status').textContent = simulation.status;
+  document.querySelector('#social-scope').textContent = simulation.scope.join(' · ');
+  document.querySelector('#social-stage').textContent = simulation.stage;
+  document.querySelector('#social-run').textContent = simulation.last_run_at ? new Date(simulation.last_run_at).toLocaleString('pt-PT', {dateStyle:'medium', timeStyle:'short'}) : 'Ainda não executada';
+  document.querySelector('#social-summary').textContent = simulation.summary;
+  document.querySelector('#social-guardrails').textContent = simulation.guardrails.join(' · ');
+}
+
 function render(prices, entries) {
   const { config, state, snapshot } = dashboard;
   const stats = ledgerStats(entries, prices);
@@ -154,13 +163,15 @@ function startRefreshCountdown() {
 }
 
 Promise.all([
-  fetch('data/dashboard.json', {cache:'no-store'}).then(r => r.json()), readLedger(), currentPrices()
+  fetch('data/dashboard.json', {cache:'no-store'}).then(r => r.json()), readLedger(), currentPrices(),
+  fetch('data/social-simulation.json', {cache:'no-store'}).then(r => r.json())
 ])
-  .then(([trend, trendEntries, prices]) => {
+  .then(([trend, trendEntries, prices, socialSimulation]) => {
     dashboards = {trend, 'trend-entries': trendEntries};
     marketPrices = prices;
     dashboard = trend;
     render(prices, trendEntries);
+    renderSocialSimulation(socialSimulation);
     startRefreshCountdown();
   })
   .catch(error => { document.querySelector('#updated').textContent = 'Dados indisponíveis'; console.error(error); });

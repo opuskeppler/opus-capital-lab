@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "tool": "MiroFish",
+  "label": "Simulação Social",
+  "status": "Piloto isolado",
+  "stage": "Pronta para materiais",
+  "scope": ["BTC", "ETH", "notícias e cenários"],
+  "last_run_at": null,
+  "summary": "A estrutura está preparada para transformar materiais verificados em cenários de reacção social. Não há qualquer simulação executada ainda: a primeira execução exige um conjunto de fontes datadas e configuração explícita do fornecedor de modelo.",
+  "guardrails": ["Sem chaves de corretora", "sem acesso à carteira", "sem execução", "não altera a Trend", "saída sempre marcada como Simulação Social", "inputs e relatório guardados para auditoria"],
+  "output_contract": {"must_include": ["materiais de origem", "data de corte", "actores simulados", "cenários alternativos", "incertezas e divergências", "limitações"], "must_not_include": ["preço-alvo", "sinal de compra/venda", "recomendação financeira", "ordem de execução"]}
+}

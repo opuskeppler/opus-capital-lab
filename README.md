@@ -13,6 +13,10 @@ Simulação auditável de uma carteira de €200 com preços reais, sem ligaçã
 
 O simulador avalia a tendência de cada activo a cada três minutos por médias móveis de 20 e 60 dias. A carteira só assume exposição quando a tendência é positiva; mantém caixa se não houver sinal. Cada decisão e operação fica guardada em `logs/ledger.jsonl`. A passagem de cada ciclo não força uma operação: só compra ou vende quando as regras o justificam.
 
+## MiroFish — Simulação Social
+
+O painel inclui um piloto isolado de **Simulação Social** com MiroFish. Serve para explorar cenários e reacções de actores a materiais datados; não prevê preços, não emite sinais e não tem qualquer acesso à carteira ou às regras da Trend. As salvaguardas e o formato de auditoria estão em [`MIROFISH_PILOT.md`](MIROFISH_PILOT.md).
+
 ## Executar
 
 ```bash
