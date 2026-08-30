@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "purpose": "Fontes de investigação para a estratégia short-term v2. Nenhuma fonte autoriza execução real.",
+  "channels": [
+    {
+      "id": "coingecko_hourly_market",
+      "type": "market_data",
+      "url": "https://api.binance.com/api/v3/klines?symbol={pair}EUR&interval=1h&limit=1000",
+      "cadence": "hourly",
+      "use": "Preços, volume, retornos, tendência e volatilidade realizada; CoinGecko é fallback quando necessário",
+      "status": "active"
+    },
+    {
+      "id": "fear_greed",
+      "type": "sentiment",
+      "url": "https://api.alternative.me/fng/?limit=7&format=json",
+      "cadence": "daily",
+      "use": "Filtro de extremos; não é sinal de compra isolado",
+      "status": "active"
+    },
+    {
+      "id": "google_news_crypto",
+      "type": "news",
+      "url": "https://news.google.com/rss/search?q=(bitcoin%20OR%20ethereum%20OR%20crypto)%20when%3A7d&hl=en-US&gl=US&ceid=US:en",
+      "cadence": "hourly",
+      "use": "Detecção de choques, risco regulatório, falhas de exchange e eventos macro",
+      "status": "active"
+    },
+    {
+      "id": "sec_press_releases",
+      "type": "official_news",
+      "url": "https://www.sec.gov/newsroom/press-releases",
+      "cadence": "daily",
+      "use": "Filtro para eventos regulatórios dos EUA",
+      "status": "active"
+    },
+    {
+      "id": "fred_macro",
+      "type": "macro",
+      "url": "https://api.stlouisfed.org/fred/series/observations",
+      "cadence": "daily",
+      "use": "Dólar, taxas e liquidez; requer chave FRED separada antes de activação",
+      "status": "planned"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "source": "Binance public REST /api/v3/klines",
+  "interval": "1h",
+  "retrieved_at": "2026-08-30T09:15:51.425315+00:00",
+  "requested_start": "2024-08-30T09:00:00+00:00",
+  "requested_end": "2026-08-30T09:00:00+00:00",
+  "assets": {
+    "bitcoin": {
+      "symbol": "BTCEUR",
+      "file": "data/historical/bitcoin-eur-1h.csv",
+      "candles": 17521,
+      "expected_minimum": 17518,
+      "first_open_time": 1725008400000,
+      "last_open_time": 1788080400000,
+      "gaps": 0,
+      "complete": true
+    },
+    "ethereum": {
+      "symbol": "ETHEUR",
+      "file": "data/historical/ethereum-eur-1h.csv",
+      "candles": 17521,
+      "expected_minimum": 17518,
+      "first_open_time": 1725008400000,
+      "last_open_time": 1788080400000,
+      "gaps": 0,
+      "complete": true
+    }
+  }
+}

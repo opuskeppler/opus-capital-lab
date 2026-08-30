@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-08-30T09:11:59.834445+00:00",
+  "mode": "shadow — no portfolio mutation or real-order authority",
+  "calibration_status": "uncalibrated; not eligible to trade until walk-forward validation",
+  "signals": {
+    "bitcoin": {
+      "probability_positive_next_24h": 0.5,
+      "decision": "cash",
+      "max_risk_per_position_pct": 0.5,
+      "aggregate_exposure_cap_pct": 60,
+      "reasons": [
+        "momentum 24h positivo",
+        "volatilidade dentro do regime",
+        "sentimento sem extremo"
+      ]
+    },
+    "ethereum": {
+      "probability_positive_next_24h": 0.6,
+      "decision": "cash",
+      "max_risk_per_position_pct": 0.5,
+      "aggregate_exposure_cap_pct": 60,
+      "reasons": [
+        "momentum 4h positivo",
+        "momentum 24h positivo",
+        "volatilidade dentro do regime",
+        "sentimento sem extremo"
+      ]
+    }
+  }
+}

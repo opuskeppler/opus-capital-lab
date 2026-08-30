@@ -153,12 +153,47 @@ function renderStrategySummary(prices) {
   });
 }
 
+function setStandardDashboardVisibility(visible) {
+  document.querySelectorAll('.headline-grid, .content-grid, .positions-section, .audit')
+    .forEach(section => { section.hidden = !visible; });
+  document.querySelector('#v2-research').hidden = visible;
+}
+
+function renderV2(shadow, research, history) {
+  const assets = Object.values(history.assets || {});
+  const complete = assets.length && assets.every(asset => asset.complete);
+  document.querySelector('#v2-history').textContent = complete ? '24 meses' : 'A validar';
+  document.querySelector('#v2-history-detail').textContent = assets.length
+    ? `${assets.map(asset => `${asset.candles.toLocaleString('pt-PT')}h`).join(' · ')} · sem lacunas`
+    : 'Histórico indisponível';
+  document.querySelector('#v2-source').textContent = research.market.bitcoin.source || '—';
+  const sentiment = research.sentiment.current;
+  document.querySelector('#v2-sentiment').textContent = `${sentiment.value} · ${sentiment.value_classification}`;
+  document.querySelector('#v2-news').textContent = `${research.news.risk_headlines.length}/${research.news.items_scanned} manchetes de risco`;
+  document.querySelector('#v2-validation').textContent = shadow.calibration_status.startsWith('uncalibrated') ? 'Pendente' : 'Em curso';
+  const status = document.querySelector('#v2-status');
+  status.textContent = 'Shadow · sem execução';
+  status.className = 'status';
+  document.querySelector('#v2-signals').innerHTML = Object.entries(shadow.signals).map(([asset, signal]) => {
+    const market = research.market[asset];
+    const symbol = asset === 'bitcoin' ? 'BTC' : 'ETH';
+    return `<article class="v2-signal"><div class="v2-signal-top"><strong>${symbol}</strong><b>${(signal.probability_positive_next_24h * 100).toFixed(0)}% · ${signal.decision === 'cash' ? 'CAIXA' : 'CANDIDATO'}</b></div><p>24h: ${signedPct(market.return_24h * 100)} · Vol. 24h: ${(market.realized_volatility_24h * 100).toFixed(2)}%<br>${signal.reasons.join(' · ')}</p></article>`;
+  }).join('');
+  document.querySelector('#updated').textContent = `RESEARCH · ${new Date(research.generated_at).toLocaleString('pt-PT', {dateStyle:'short', timeStyle:'short'})}`;
+}
+
 function selectStrategy(key, prices) {
   activeStrategy = key;
-  dashboard = dashboards[key];
-  const entries = dashboards[`${key}-entries`];
   document.querySelectorAll('.strategy-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.strategy === key));
   history.replaceState(null, '', `#${key}`);
+  if (key === 'short-term-v2') {
+    setStandardDashboardVisibility(false);
+    renderV2(dashboards['short-term-v2'], dashboards.research, dashboards.history);
+    return;
+  }
+  setStandardDashboardVisibility(true);
+  dashboard = dashboards[key];
+  const entries = dashboards[`${key}-entries`];
   renderStrategySummary(prices);
   render(prices, entries);
 }
@@ -181,14 +216,18 @@ Promise.all([
   fetch('data/dashboard.json', {cache:'no-store'}).then(r => r.json()), readLedger(),
   fetch('data/short-term-dashboard.json', {cache:'no-store'}).then(r => r.json()),
   fetch('logs/short-term-ledger.jsonl', {cache:'no-store'}).then(r => r.ok ? r.text() : '').then(text => text.trim().split('\n').filter(Boolean).map(line => JSON.parse(line))),
-  currentPrices()
+  currentPrices(),
+  fetch('data/short-term-v2-shadow.json', {cache:'no-store'}).then(r => r.json()),
+  fetch('data/research-snapshot.json', {cache:'no-store'}).then(r => r.json()),
+  fetch('data/historical/manifest.json', {cache:'no-store'}).then(r => r.json())
 ])
-  .then(([trend, trendEntries, shortTerm, shortEntries, prices]) => {
-    dashboards = {trend, 'short-term': shortTerm, 'trend-entries': trendEntries, 'short-term-entries': shortEntries};
+  .then(([trend, trendEntries, shortTerm, shortEntries, prices, shortTermV2, research, history]) => {
+    dashboards = {trend, 'short-term': shortTerm, 'trend-entries': trendEntries, 'short-term-entries': shortEntries,
+      'short-term-v2': shortTermV2, research, history};
     marketPrices = prices;
     document.querySelectorAll('.strategy-tab').forEach(tab => tab.addEventListener('click', () => selectStrategy(tab.dataset.strategy, marketPrices)));
     const selected = location.hash.slice(1);
-    selectStrategy(['trend', 'short-term'].includes(selected) ? selected : 'trend', prices);
+    selectStrategy(['trend', 'short-term', 'short-term-v2'].includes(selected) ? selected : 'trend', prices);
     startRefreshCountdown();
   })
   .catch(error => { document.querySelector('#updated').textContent = 'Dados indisponíveis'; console.error(error); });

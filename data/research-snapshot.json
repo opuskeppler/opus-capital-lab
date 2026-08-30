@@ -1,0 +1,81 @@
+{
+  "generated_at": "2026-08-30T09:11:13.990082+00:00",
+  "purpose": "research-only; inputs for short-term v2, never execution",
+  "market": {
+    "bitcoin": {
+      "price_eur": 67451.51,
+      "return_4h": -0.00069,
+      "return_24h": 0.00608,
+      "ma_12h_eur": 67508.3117,
+      "ma_48h_eur": 67359.9263,
+      "trend_up": false,
+      "realized_volatility_24h": 0.00658,
+      "realized_volatility_30d": 0.02082,
+      "volume_ratio_24h_vs_7d": 0.263,
+      "samples": 1000,
+      "source": "Binance 1h"
+    },
+    "ethereum": {
+      "price_eur": 2122.01,
+      "return_4h": 0.00017,
+      "return_24h": 0.00873,
+      "ma_12h_eur": 2122.2942,
+      "ma_48h_eur": 2116.2592,
+      "trend_up": false,
+      "realized_volatility_24h": 0.00765,
+      "realized_volatility_30d": 0.02735,
+      "volume_ratio_24h_vs_7d": 0.243,
+      "samples": 1000,
+      "source": "Binance 1h"
+    }
+  },
+  "sentiment": {
+    "current": {
+      "value": "69",
+      "value_classification": "Greed",
+      "timestamp": "1788048000",
+      "time_until_update": "53326"
+    },
+    "history": [
+      {
+        "value": "68",
+        "value_classification": "Greed",
+        "timestamp": "1787961600"
+      },
+      {
+        "value": "73",
+        "value_classification": "Greed",
+        "timestamp": "1787875200"
+      },
+      {
+        "value": "71",
+        "value_classification": "Greed",
+        "timestamp": "1787788800"
+      },
+      {
+        "value": "65",
+        "value_classification": "Greed",
+        "timestamp": "1787702400"
+      },
+      {
+        "value": "74",
+        "value_classification": "Greed",
+        "timestamp": "1787616000"
+      },
+      {
+        "value": "73",
+        "value_classification": "Greed",
+        "timestamp": "1787529600"
+      }
+    ]
+  },
+  "news": {
+    "items_scanned": 30,
+    "risk_headlines": [
+      "StarkWare Researcher Demonstrates Quantum-Resistant Bitcoin Transaction - The Quantum Insider",
+      "Exclusive | Trump Family’s New Crypto Bank Is Backed by Abu Dhabi Sheikh - WSJ",
+      "Trump Family Crypto Bank Backed by Abu Dhabi Royal - WSJ"
+    ],
+    "risk_score": 0.1
+  }
+}
