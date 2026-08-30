@@ -149,6 +149,50 @@
       "verdict": "Vale como camada de cenários e risco qualitativo, desde que todo o resultado seja apresentado como Simulação Social e nunca como forecast ou sinal.",
       "next_action": "Recolher um primeiro conjunto de fontes datadas para BTC/ETH; definir actores e uma data de corte; executar somente depois da configuração explícita do fornecedor de modelo; avaliar retrospectivamente se os alertas eram úteis.",
       "execution_authority": "nenhuma"
+    },
+    {
+      "id": "2026-08-30-ruflo-multi-agent-orchestration",
+      "recorded_at": "2026-08-30T19:44:27+01:00",
+      "category": "orquestração multi-agente / produtividade de projectos",
+      "title": "Ruflo — meta-harness para equipas de agentes de IA",
+      "materials": [
+        {
+          "type": "vídeo enviado por Rodd",
+          "claims": [
+            "Mais de 60 agentes especializados organizados em camadas.",
+            "Memória colectiva e roteamento de modelos por complexidade.",
+            "Uso para pesquisa, código, testes, revisão e documentação."
+          ]
+        },
+        {
+          "type": "repositório confirmado",
+          "url": "https://github.com/ruvnet/ruflo",
+          "verified_at": "2026-08-30",
+          "observed": "O README descreve uma camada de orquestração para Claude Code e Codex, com agentes especializados, memória, plugins, workers, telemetria e instalação que altera a configuração do ambiente."
+        }
+      ],
+      "mechanism": "Um orquestrador encaminha tarefas para agentes especializados, gere memória partilhada e pode correr trabalho em paralelo. A proposta do projecto promete automação e aprendizagem a partir das trajectórias de execução.",
+      "fit_for_opus": {
+        "useful": [
+          "Trabalhos bem delimitados com entregáveis paralelizáveis: pesquisa + benchmark + implementação + teste/revisão.",
+          "Auditorias de qualidade antes de publicar um projecto, desde que exista uma definição objectiva de pronto.",
+          "Memória operacional por projecto quando a informação estiver organizada, tiver proveniência e puder ser revista."
+        ],
+        "not_suitable": [
+          "Activar dezenas de agentes por defeito para tarefas simples ou vagas.",
+          "Substituir decisão comercial, direcção criativa, validação humana ou evidência de mercado.",
+          "Dar autonomia sobre dinheiro, publicação externa, credenciais ou dados privados."
+        ]
+      },
+      "risks_and_limits": [
+        "Mais agentes multiplicam custo, latência, conflitos e necessidade de revisão; a promessa de poupança não é prova independente de retorno.",
+        "A instalação completa cria ficheiros, hooks, servidor MCP e processos no ambiente; exige sandbox e auditoria antes de ser adoptada.",
+        "Memória colectiva sem curadoria propaga erros e contexto obsoleto entre tarefas."
+      ],
+      "status": "Hipótese",
+      "verdict": "A filosofia é útil, mas a adopção correcta é uma orquestração mínima por tipo de trabalho, não um enxame permanente. O ambiente actual já permite delegação controlada; Ruflo só deve entrar se demonstrar melhoria mensurável de prazo, qualidade ou custo num piloto isolado.",
+      "next_action": "Desenhar um piloto num único projecto com 3–4 papéis, orçamento máximo, saídas auditáveis e revisão humana; comparar contra o fluxo actual. Não instalar globalmente nem activar hooks/daemon antes dessa prova.",
+      "execution_authority": "nenhuma"
     }
   ]
 }
