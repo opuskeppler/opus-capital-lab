@@ -193,6 +193,21 @@
       "verdict": "A filosofia é útil, mas a adopção correcta é uma orquestração mínima por tipo de trabalho, não um enxame permanente. O ambiente actual já permite delegação controlada; Ruflo só deve entrar se demonstrar melhoria mensurável de prazo, qualidade ou custo num piloto isolado.",
       "next_action": "Desenhar um piloto num único projecto com 3–4 papéis, orçamento máximo, saídas auditáveis e revisão humana; comparar contra o fluxo actual. Não instalar globalmente nem activar hooks/daemon antes dessa prova.",
       "execution_authority": "nenhuma"
+    },
+    {
+      "id": "2026-08-30-fincept-and-vibe-trading-radar",
+      "recorded_at": "2026-08-30T20:10:50+01:00",
+      "category": "plataformas de investigação, backtest e trading",
+      "title": "Fincept Terminal e Vibe-Trading — radar técnico, sem instalação",
+      "materials": [
+        {"name": "Fincept Terminal", "repository": "https://github.com/Fincept-Corporation/FinceptTerminal", "license": "AGPL-3.0-or-later", "observed": "Terminal desktop com análise, conectores de dados, quant, backtesting e paper trading."},
+        {"name": "Vibe-Trading (HKUDS)", "repository": "https://github.com/HKUDS/Vibe-Trading", "license": "MIT", "observed": "Workspace de investigação com dados, backtesting, relatórios, memória, modo shadow e conectores de broker opcionais."},
+        {"name": "VibeTradingLabs", "repository": "https://github.com/VibeTradingLabs/vibetrading", "license": "MIT", "observed": "Framework crypto de linguagem natural para geração de estratégia, código e backtest."}
+      ],
+      "status": "Observado — radar",
+      "verdict": "Não justificam instalação agora. A Trend tem prioridade e os três acrescentam superfície técnica antes de provarem uma melhoria. Vibe-Trading HKUDS é o candidato mais forte para um piloto futuro de research/backtest; Fincept é uma alternativa de terminal quando o nosso dashboard deixar de chegar; VibeTradingLabs é apenas referência de arquitectura.",
+      "activation_condition": "Só reabrir a avaliação se houver uma necessidade concreta que o laboratório actual não cubra: backtest multi-activo mais profundo, relatórios quant reproduzíveis ou uma bancada de pesquisa dedicada. Primeiro piloto sem credenciais, sem execução e com comparação objectiva contra o fluxo actual.",
+      "execution_authority": "nenhuma"
     }
   ]
 }
