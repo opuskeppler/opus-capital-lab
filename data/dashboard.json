@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T22:29:45.712539+00:00",
+  "generated_at": "2026-09-15T05:35:51.069451+00:00",
   "config": {
     "starting_capital_eur": 200.0,
     "target_capital_eur": 400.0,
@@ -18,45 +18,45 @@
   },
   "state": {
     "started_at": "2026-08-28T18:56:55.753467+00:00",
-    "cash_eur": 104.77916557413951,
+    "cash_eur": 104.9568712119309,
     "holdings": {
       "bitcoin": 0.0,
-      "ethereum": 0.04036910561688578
+      "ethereum": 0.03990794019450854
     },
     "peak_value_eur": 209.40506563993148,
-    "max_drawdown": 0.08043384592636071,
+    "max_drawdown": 0.08720710959898537,
     "last_rebalance_date": "2026-08-28",
-    "last_evaluation_at": "2026-09-14T22:29:45.712539+00:00"
+    "last_evaluation_at": "2026-09-15T05:35:51.069451+00:00"
   },
   "snapshot": {
-    "timestamp": "2026-09-14T22:29:45.712539+00:00",
-    "portfolio_value_eur": 193.37,
-    "return_pct": -3.316,
-    "drawdown_pct": 7.575,
+    "timestamp": "2026-09-15T05:35:51.069451+00:00",
+    "portfolio_value_eur": 190.97,
+    "return_pct": -4.514,
+    "drawdown_pct": 8.721,
     "risk_pause": false,
     "analysis": {
       "bitcoin": {
-        "price_eur": 67739.5594,
-        "sma20_eur": 67586.8616,
-        "sma60_eur": 60863.6948,
-        "momentum_20d": -0.00081,
+        "price_eur": 67067.7003,
+        "sma20_eur": 67548.2832,
+        "sma60_eur": 61049.7178,
+        "momentum_20d": -0.02629,
         "bullish": false
       },
       "ethereum": {
-        "price_eur": 2194.4908,
-        "sma20_eur": 2131.8427,
-        "sma60_eur": 1856.5718,
-        "momentum_20d": 0.02053,
+        "price_eur": 2155.3243,
+        "sma20_eur": 2131.2507,
+        "sma60_eur": 1865.3956,
+        "momentum_20d": 0.00011,
         "bullish": true
       }
     },
     "operations": [
       {
-        "side": "SELL",
-        "asset": "bitcoin",
-        "eur": 87.14,
+        "side": "BUY",
+        "asset": "ethereum",
+        "eur": 86.01,
         "fee_eur": 0.17,
-        "quantity": 0.001286327002265118
+        "quantity": 0.03990794019450854
       }
     ]
   }
