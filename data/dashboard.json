@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T05:35:51.069451+00:00",
+  "generated_at": "2026-09-15T06:47:51.227339+00:00",
   "config": {
     "starting_capital_eur": 200.0,
     "target_capital_eur": 400.0,
@@ -18,35 +18,35 @@
   },
   "state": {
     "started_at": "2026-08-28T18:56:55.753467+00:00",
-    "cash_eur": 104.9568712119309,
+    "cash_eur": 103.94587479774782,
     "holdings": {
       "bitcoin": 0.0,
-      "ethereum": 0.03990794019450854
+      "ethereum": 0.039522324548753957
     },
     "peak_value_eur": 209.40506563993148,
-    "max_drawdown": 0.08720710959898537,
+    "max_drawdown": 0.09599958148225873,
     "last_rebalance_date": "2026-08-28",
-    "last_evaluation_at": "2026-09-15T05:35:51.069451+00:00"
+    "last_evaluation_at": "2026-09-15T06:47:51.227339+00:00"
   },
   "snapshot": {
-    "timestamp": "2026-09-15T05:35:51.069451+00:00",
-    "portfolio_value_eur": 190.97,
-    "return_pct": -4.514,
-    "drawdown_pct": 8.721,
+    "timestamp": "2026-09-15T06:47:51.227339+00:00",
+    "portfolio_value_eur": 189.13,
+    "return_pct": -5.434,
+    "drawdown_pct": 9.6,
     "risk_pause": false,
     "analysis": {
       "bitcoin": {
-        "price_eur": 67067.7003,
-        "sma20_eur": 67548.2832,
-        "sma60_eur": 61049.7178,
-        "momentum_20d": -0.02629,
+        "price_eur": 67033.7258,
+        "sma20_eur": 67546.5845,
+        "sma60_eur": 61049.1516,
+        "momentum_20d": -0.02678,
         "bullish": false
       },
       "ethereum": {
-        "price_eur": 2155.3243,
-        "sma20_eur": 2131.2507,
-        "sma60_eur": 1865.3956,
-        "momentum_20d": 0.00011,
+        "price_eur": 2155.3899,
+        "sma20_eur": 2131.254,
+        "sma60_eur": 1865.3967,
+        "momentum_20d": 0.00014,
         "bullish": true
       }
     },
@@ -54,9 +54,9 @@
       {
         "side": "BUY",
         "asset": "ethereum",
-        "eur": 86.01,
+        "eur": 85.19,
         "fee_eur": 0.17,
-        "quantity": 0.03990794019450854
+        "quantity": 0.039522324548753957
       }
     ]
   }
