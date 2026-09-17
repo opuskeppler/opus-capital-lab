@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T01:34:18.190835+00:00",
+  "generated_at": "2026-09-17T06:10:23.535347+00:00",
   "config": {
     "starting_capital_eur": 200.0,
     "target_capital_eur": 400.0,
@@ -18,35 +18,35 @@
   },
   "state": {
     "started_at": "2026-08-28T18:56:55.753467+00:00",
-    "cash_eur": 103.73185879465056,
+    "cash_eur": 102.57392758315865,
     "holdings": {
       "bitcoin": 0.0,
-      "ethereum": 0.039954161429202946
+      "ethereum": 0.039529288350028946
     },
     "peak_value_eur": 209.40506563993148,
-    "max_drawdown": 0.09786084395896455,
+    "max_drawdown": 0.10793118394927392,
     "last_rebalance_date": "2026-08-28",
-    "last_evaluation_at": "2026-09-17T01:34:18.190835+00:00"
+    "last_evaluation_at": "2026-09-17T06:10:23.535347+00:00"
   },
   "snapshot": {
-    "timestamp": "2026-09-17T01:34:18.190835+00:00",
-    "portfolio_value_eur": 188.74,
-    "return_pct": -5.629,
-    "drawdown_pct": 9.786,
+    "timestamp": "2026-09-17T06:10:23.535347+00:00",
+    "portfolio_value_eur": 186.64,
+    "return_pct": -6.682,
+    "drawdown_pct": 10.793,
     "risk_pause": false,
     "analysis": {
       "bitcoin": {
-        "price_eur": 66801.7422,
-        "sma20_eur": 67327.6069,
-        "sma60_eur": 61356.3234,
-        "momentum_20d": -0.01085,
+        "price_eur": 66552.7583,
+        "sma20_eur": 67315.1577,
+        "sma60_eur": 61352.1737,
+        "momentum_20d": -0.01454,
         "bullish": false
       },
       "ethereum": {
-        "price_eur": 2127.704,
-        "sma20_eur": 2125.9191,
-        "sma60_eur": 1880.252,
-        "momentum_20d": 0.00302,
+        "price_eur": 2126.5669,
+        "sma20_eur": 2125.8622,
+        "sma60_eur": 1880.233,
+        "momentum_20d": 0.00249,
         "bullish": true
       }
     },
@@ -54,9 +54,9 @@
       {
         "side": "BUY",
         "asset": "ethereum",
-        "eur": 85.01,
+        "eur": 84.06,
         "fee_eur": 0.17,
-        "quantity": 0.039954161429202946
+        "quantity": 0.039529288350028946
       }
     ]
   }
