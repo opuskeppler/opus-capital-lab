@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T04:38:20.549362+00:00",
+  "generated_at": "2026-09-18T04:38:45.793500+00:00",
   "config": {
     "starting_capital_eur": 200.0,
     "target_capital_eur": 400.0,
@@ -18,43 +18,43 @@
   },
   "state": {
     "started_at": "2026-08-28T18:56:55.753467+00:00",
-    "cash_eur": 16.95039907595239,
+    "cash_eur": 99.03042773559986,
     "holdings": {
-      "bitcoin": 0.001222033055525138,
+      "bitcoin": 0.0,
       "ethereum": 0.03873643606598779
     },
     "peak_value_eur": 209.40506563993148,
-    "max_drawdown": 0.12749953206799514,
+    "max_drawdown": 0.12798130808885433,
     "last_rebalance_date": "2026-08-28",
-    "last_evaluation_at": "2026-09-18T04:38:20.549362+00:00"
+    "last_evaluation_at": "2026-09-18T04:38:45.793500+00:00"
   },
   "snapshot": {
-    "timestamp": "2026-09-18T04:38:20.549362+00:00",
-    "portfolio_value_eur": 182.64,
-    "return_pct": -8.678,
-    "drawdown_pct": 12.701,
+    "timestamp": "2026-09-18T04:38:45.793500+00:00",
+    "portfolio_value_eur": 182.44,
+    "return_pct": -8.78,
+    "drawdown_pct": 12.798,
     "risk_pause": false,
     "analysis": {
       "bitcoin": {
-        "price_eur": 67317.4146,
-        "sma20_eur": 67304.2269,
-        "sma60_eur": 61522.4159,
-        "momentum_20d": 0.00457,
-        "bullish": true
+        "price_eur": 67301.3854,
+        "sma20_eur": 67303.4254,
+        "sma60_eur": 61522.1487,
+        "momentum_20d": 0.00433,
+        "bullish": false
       },
       "ethereum": {
-        "price_eur": 2153.7885,
-        "sma20_eur": 2127.7392,
-        "sma60_eur": 1888.4479,
-        "momentum_20d": 0.03301,
+        "price_eur": 2153.2754,
+        "sma20_eur": 2127.7135,
+        "sma60_eur": 1888.4394,
+        "momentum_20d": 0.03276,
         "bullish": true
       }
     },
     "operations": [
       {
-        "side": "BUY",
+        "side": "SELL",
         "asset": "bitcoin",
-        "eur": 82.26,
+        "eur": 82.24,
         "fee_eur": 0.16,
         "quantity": 0.001222033055525138
       }
